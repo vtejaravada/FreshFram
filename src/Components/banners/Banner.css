@@ -35,3 +35,23 @@
         height: 250px;
     }
 }
+
+@media(max-width:1200px)
+{
+    .bannerImg {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+    
+    .bannerImgSec {
+        width: 49%;
+        margin: 10px 0px;
+    }
+    
+    .bannerImgSec .box {
+        height: 300px;
+    }
+}

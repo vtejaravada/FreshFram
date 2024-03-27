@@ -71,7 +71,7 @@ const Footer = () => {
               icon.map(icon => (
                 <div key={icon.id} className="footerIcon">
                   <div className="box d-flex align-items-center w-100">
-                    <img src={icon.image} alt='icons' width={100}/>
+                    <img src={icon.image} alt='icons' width={100} />
                     <div className="info_Text">
                       <h4>{icon.description}</h4>
                       <p>{icon.price}</p>
@@ -175,33 +175,33 @@ const Footer = () => {
 
           <hr />
 
-          <div className="row lastStrip">
+          <div className="lastStrip">
 
-            <div className="col-md-3">
+            <div className=" footDown footDown1">
               <p>© 2022, <span className="text-success">Nest </span> - HTML Ecommerce Template All rights reserved</p>
             </div>
 
-            <div className="col-md-6 d-flex footerMiddle ">
-
-              <div className="phNo d-flex align-items-center">
-                <span><TbPhoneCall className='headseti' /></span>
-                <div className="info ml-3">
-                  <h3 className="text-g mb-0">1900 - 666</h3>
-                  <p className="mb-0">Working 8:00 - 22:00</p>
-                </div>
+            <div className="footDown phNo d-flex align-items-center">
+              <span><TbPhoneCall className='headseti' /></span>
+              <div className="info ms-3">
+                <h3 className="text-g mb-0">1900 - 666</h3>
+                <p className="mb-0">Working 8:00 - 22:00</p>
               </div>
-
-              <div className="phNo d-flex align-items-center">
-                <span><TbPhoneCall className='headseti' /></span>
-                <div className="info ml-3">
-                  <h3 className="text-g mb-0">1900 - 888</h3>
-                  <p className="mb-0">24/7 Support Center</p>
-                </div>
-              </div>
-
             </div>
 
-            <div className="col-md-3 part3">
+            <div className="footDown phNo d-flex align-items-center">
+              <span><TbPhoneCall className='headseti' /></span>
+              <div className="info ms-3">
+                <h3 className="text-g mb-0">1900 - 888</h3>
+                <p className="mb-0">24/7 Support Center</p>
+              </div>
+            </div>
+
+            <div className=" footDown footDown2">
+              <p>© 2022, <span className="text-success">Nest </span> - HTML Ecommerce Template All rights reserved</p>
+            </div>
+
+            <div className="footDown part3">
               <div className="d-flex align-items-center">
                 <h5>Follow Us</h5>
                 <ul className="list-inline socialIcons">
@@ -215,11 +215,8 @@ const Footer = () => {
             </div>
 
           </div>
-
         </div>
-
       </footer>
-
     </div>
   )
 }

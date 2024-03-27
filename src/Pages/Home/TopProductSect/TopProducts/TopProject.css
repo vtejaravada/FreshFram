@@ -1,3 +1,4 @@
+
 .topSelling_box h3{
     font-size: 35px;
     font-weight: 600;
@@ -62,8 +63,22 @@
     transform: translateY(-10px);
 }
 
+
+
 @media(max-width:1300px){
     .topSelling_box h3 {
         font-size: 30px;
+    }
+}
+
+@media(max-width:1200px){
+
+    .topSelling_box .items .img {
+        width: 15%;
+        background: #efefef;
+    }
+
+    .topSelling_box .items .info {
+        width: 85%;
     }
 }

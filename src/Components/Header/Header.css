@@ -274,4 +274,28 @@ header .countryWrapper .openSelect {
     .partHead3{
         width: 41%;
     }
+
 }
+
+@media(max-width:1024px)
+{
+    .iconCom .lable{
+        display: none;
+    }
+
+    .info1
+    {
+        display: none;
+    }
+
+    header .headerSearch .search 
+    {
+        width: 65%;
+    }
+    
+    header .headerSearch .selecrDropWrapper 
+    {
+        width: 35%;
+    }
+}
+

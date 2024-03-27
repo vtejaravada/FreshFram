@@ -1,4 +1,15 @@
-.topProductsSection{
+.topProductsSection {
     padding: 35px 0px;
 }
 
+.topProductSec {
+    width: 23%;
+    margin: auto;
+}
+
+@media(max-width:1200px) {
+    .topProductSec {
+        width: 45%;
+        padding: 20px 0px;
+    }
+}

@@ -99,7 +99,6 @@ const Header = (props) => {
 
                             <div className="logo partHead1 d-flex align-items-center">
                                 <Link to="/"><img src={logo} alt="" /></Link>
-                                {/* <div className="navbarToggle ms-auto"><MenuIcon/></div> */}
                             </div>
 
                             {/* headerSearch  start here */}
@@ -192,6 +191,8 @@ const Header = (props) => {
 
                                             }
 
+                                            <div className="navbarToggle ms-auto"><MenuIcon /></div>
+
                                         </ul>
 
                                     </div>
@@ -199,9 +200,13 @@ const Header = (props) => {
                                 </div>
                             </ClickAwayListener>
 
+
+
                         </div>
                     </div>
                 </header>
+
+
 
                 <Navba data={props.data} />
 

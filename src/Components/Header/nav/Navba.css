@@ -294,7 +294,26 @@ li:hover .dropdown_menu {
     }
 }
 
-@media(max-width:1050px) 
+@media(max-width:1024px)
 {
-    
+    .info1
+    {
+        display: none;
+    }
+
+    .part1 {
+        width: 21%;
+    }
+
+    .part2 
+    {
+        width: 71%;
+    }
+
+    .nav .part3 
+    {
+        justify-content: flex-end;
+        width: 8%;
+    }
+
 }

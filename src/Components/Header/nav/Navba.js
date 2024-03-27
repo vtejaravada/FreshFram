@@ -184,7 +184,7 @@ const Nav = (props) => {
                     <div className="part3 d-flex align-items-center">
                         <div className="phNo d-flex align-items-center">
                             <span><IoIosHeadset className='headseti' /></span>
-                            <div className="info ms-2">
+                            <div className="info info1 ms-2">
                                 <h3 className="text-g mb-0">1900 - 888</h3>
                                 <p className="mb-0">24/7 Support Center</p>
                             </div>
