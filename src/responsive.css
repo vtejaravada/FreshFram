@@ -1,0 +1,14 @@
+@media only screen and (min-width:320px) and (max-width:767px){
+    header .part1
+    {
+        max-width: 100%;
+        display: 0 0 flex;
+    }
+}
+
+@media only screen and (min-width:320px) and (max-width:992px){
+    header .part1
+    {
+        max-width: 100%;
+    }
+}
