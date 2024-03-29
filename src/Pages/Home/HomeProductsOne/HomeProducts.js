@@ -5,13 +5,14 @@ import '../HomeProductsOne/HomeProducts.css'
 
 const HomeProducts = (props) => {
 
-  const [prodData, setprodData] = useState(props.data)
+  const [prodData] = useState(props.data)
   const [catArray, setcatArray] = useState([])
   const [activeTab, setactiveTab] = useState(0);
   const [activeTabIndex, setactiveTabIndex] = useState(0);
   const [activeTabData, setActiveTabData] = useState([]);
 
   const catArr=[];
+
 //display items names list
   useEffect(()=>{
     prodData.length!==0 &&
@@ -34,8 +35,8 @@ const HomeProducts = (props) => {
     var arr=[];
     setActiveTabData(arr);
     prodData.length !==0 &&
-    prodData.map((item, index)=>{
-      item.items.map((item_, index_)=>{
+    prodData.map((item)=>{
+      item.items.map((item_)=>{
         if(item_.cat_name === activeTab){
           item_.products.length!== 0 &&
           item_.products.map((product)=>{
@@ -63,7 +64,7 @@ const HomeProducts = (props) => {
                     catArray.map((cat, index)=>{
                       return(
                         <li key={index} className="list list-inline-item">
-                          <a className={`cursor text-capitalize ${activeTabIndex === index ? 'act' : ''}`} onClick={()=>{
+                          <a href='' className={`cursor text-capitalize ${activeTabIndex === index ? 'act' : ''}`} onClick={()=>{
                             setactiveTab(cat)
                             setactiveTabIndex(index)
                           }}>{cat.substr(0,10)+'...'}</a>

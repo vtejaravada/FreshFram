@@ -10,7 +10,6 @@ import Google from '../../assets/images/google.png';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
 
-import { initializeApp } from "firebase/app";
 import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { app } from '../../firebase';
 import { useNavigate } from 'react-router-dom';
@@ -74,15 +73,15 @@ const SignIn = () => {
     setShowLoader(true);
     signInWithPopup(auth, googleProvider)
       .then((result) => {
-        
+
         const credential = GoogleAuthProvider.credentialFromResult(result);
         const token = credential.accessToken;
         // The signed-in user info.
         const user = result.user;
-        
+
         setShowLoader(false);
         setFormFields({
-     
+
         })
         localStorage.setItem('isLogin', true);
         context.signIn();
@@ -149,7 +148,10 @@ const SignIn = () => {
 
               <div className="form-group mt-5 mb-4 w-100 signInOr">
                 <p className='text-center'>OR</p>
-                <Button className='w-100' variant="outlined" onClick={signInWithGoogle}><img src={Google} />Sign In with Google</Button>
+                <Button className='w-100' variant="outlined" onClick={signInWithGoogle}>
+                  <img src={Google} alt='google' />
+                  Sign In with Google
+                </Button>
               </div>
 
               <p className='text-center'>Not have an account

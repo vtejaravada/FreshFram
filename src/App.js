@@ -120,7 +120,7 @@ function App() {
     <BrowserRouter>
       <MyContext.Provider value={value}>
         {
-          isLoading===true && <div className="loader"><img src={loading}/></div>
+          isLoading===true && <div className="loader"> <img src={loading} alt='loading'/> </div>
         }
         <Header data={productData}/>
         <Routes>

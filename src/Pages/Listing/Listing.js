@@ -34,7 +34,7 @@ const Listing = (props) => {
                 //page == double cat
                 else {
                     item.items.length !== 0 &&
-                        item.items.map((item_, index_) => {
+                        item.items.map((item_) => {
                             if (item_.cat_name.split(' ').join('-').toLowerCase() === id.toLocaleLowerCase())
                                 item_.products.length !== 0 &&
                                     item_.products.map((product) => {
@@ -52,14 +52,14 @@ const Listing = (props) => {
     const filterByBrand = (keyword) => {
 
         props.data.length !== 0 &&
-            props.data.map((item, index) => {
+            props.data.map((item) => {
 
                 //page == single cat
                 if (props.single === true) {
 
                     item.items.length !== 0 &&
                         item.items.map((item_) => {
-                            item_.products.map((item__, index__) => {
+                            item_.products.map((item__) => {
                                 if (item__.brand.toLowerCase() === keyword.toLowerCase()) {
                                     //console.log(item__)
                                     itemsData.push({ ...item__, parentCatName: item.cat_name, subCatName: item_.cat_name })
@@ -75,10 +75,10 @@ const Listing = (props) => {
                 //page == double cat
                 else {
                     item.items.length !== 0 &&
-                        item.items.map((item_, index_) => {
+                        item.items.map((item_) => {
                             // console.log(item_.cat_name.replace(/[^A-Za-z]/g,"-").toLowerCase())
                             if (item_.cat_name.split(' ').join('-').toLowerCase() == id.split(' ').join('-').toLowerCase()) {
-                                item_.products.map((item__, index__) => {
+                                item_.products.map((item__) => {
                                     if (item__.brand.toLowerCase() === keyword.toLowerCase()) {
                                         itemsData.push({ ...item__, parentCatName: item.cat_name, subCatName: item_.cat_name })
                                     }
@@ -104,7 +104,7 @@ const Listing = (props) => {
     const filterByPrice = (minValue, maxValue) => {
 
         props.data.length !== 0 &&
-            props.data.map((item, index) => {
+            props.data.map((item) => {
 
                 //page == single cat
                 if (props.single === true) {
@@ -126,7 +126,7 @@ const Listing = (props) => {
 
                 else {
                     item.items.length !== 0 &&
-                        item.items.map((item_, index_) => {
+                        item.items.map((item_) => {
                             if (item_.cat_name.split(' ').join('-').toLowerCase() == id.split(' ').join('-').toLowerCase()) {
                                 item_.products.map((product) => {
                                     let price = parseInt(product.price.toString().replace(/,/g, ""))
@@ -147,7 +147,7 @@ const Listing = (props) => {
     const filterByRating = (keyword) => {
 
         props.data.length !== 0 &&
-            props.data.map((item, index) => {
+            props.data.map((item) => {
 
                 //page == single cat
                 if (props.single === true) {
@@ -165,10 +165,10 @@ const Listing = (props) => {
                 //page == double cat
                 else {
                     item.items.length !== 0 &&
-                        item.items.map((item_, index_) => {
+                        item.items.map((item_) => {
                             // console.log(item_.cat_name.replace(/[^A-Za-z]/g,"-").toLowerCase())
                             if (item_.cat_name.split(' ').join('-').toLowerCase() == id.split(' ').join('-').toLowerCase()) {
-                                item_.products.map((item__, index__) => {
+                                item_.products.map((item__) => {
                                     let rating = parseFloat(item__.rating);
                                     if(rating === keyword){
                                         itemsData.push({ ...item__, parentCatName: item.cat_name, subCatName: item_.cat_name })
