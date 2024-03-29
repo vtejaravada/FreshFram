@@ -65,13 +65,13 @@ const Footer = () => {
     <div className="footerWrapper">
 
       <div className="footerBoxes">
-        <div className="container-fluid">
+        <div className="container-fluid footer_Main">
           <div className="row footerFul">
             {
               icon.map(icon => (
                 <div key={icon.id} className="footerIcon">
                   <div className="box d-flex align-items-center w-100">
-                    <img src={icon.image} alt='icons' width={100} />
+                    <img src={icon.image} alt='icons' width={75} />
                     <div className="info_Text">
                       <h4>{icon.description}</h4>
                       <p>{icon.price}</p>
@@ -86,7 +86,7 @@ const Footer = () => {
 
       <footer>
 
-        <div className="container-fluid">
+        <div className="container-fluid ">
 
           <div className="footerHead">
             <div className=" partFoot">

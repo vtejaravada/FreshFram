@@ -191,7 +191,7 @@ const Header = (props) => {
 
                                             }
 
-                                            <div className="navbarToggle ms-auto"><MenuIcon /></div>
+                                            {/* <div className="navbarToggle ms-auto"><MenuIcon /></div> */}
 
                                         </ul>
 

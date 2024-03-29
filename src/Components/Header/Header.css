@@ -229,7 +229,7 @@ header .countryWrapper .openSelect {
     margin-right: 8px !important;
 }
 
-@media(max-width:1650px)
+@media(max-width:1750px)
 {
     .headerTabs .icon {
         justify-content: center;
@@ -242,6 +242,14 @@ header .countryWrapper .openSelect {
 
     .headerTabs .icon>.iconCom {
         line-height: 0.5;
+    }
+
+    .partHead3 {
+        width: 35%;
+    }
+
+    .partHead2 {
+        width: 55%;
     }
 }
 
@@ -261,18 +269,59 @@ header .countryWrapper .openSelect {
     }
 }
 
-@media(max-width:1050px)
+@media(max-width:1200px)
+{
+    .partHead1{
+        width: 12%;
+        height: 50px;
+    }
+    
+    .partHead2{
+        width: 40%;
+    }
+    
+    .partHead3{
+        width: 48%;
+    }
+}
+
+@media(max-width:1120px)
+{
+    .partHead1{
+        width: 12%;
+        height: 50px;
+    }
+    
+    .partHead2{
+        width: 42%;
+    }
+    
+    .partHead3{
+        width: 46%;
+    }
+}
+
+@media(max-width:1070px)
 {
     .partHead1{
         width: 14%;
     }
     
     .partHead2{
-        width: 45%;
+        width: 40%;
     }
     
     .partHead3{
-        width: 41%;
+        width: 46%;
+    }
+    header .headerSearch .search 
+    {
+        width: 65%;
+    }
+    
+    header .headerSearch .selecrDropWrapper 
+    {
+        width: 35%;
     }
 
 }
@@ -286,16 +335,6 @@ header .countryWrapper .openSelect {
     .info1
     {
         display: none;
-    }
-
-    header .headerSearch .search 
-    {
-        width: 65%;
-    }
-    
-    header .headerSearch .selecrDropWrapper 
-    {
-        width: 35%;
     }
 }
 

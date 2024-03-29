@@ -63,3 +63,17 @@
         padding: 15px 10px;
     }
 }
+
+@media (max-width: 768px){
+    .homeProducts .productRow .item {
+        width: 50%;
+    }
+    
+}
+
+@media (max-width: 425px){
+    .homeProducts .productRow .item {
+        width: 100%;
+    }
+    
+}

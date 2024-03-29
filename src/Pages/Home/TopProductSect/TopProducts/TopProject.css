@@ -82,3 +82,27 @@
         width: 85%;
     }
 }
+
+@media(max-width:850px){
+
+    .topSelling_box .items .img {
+        width: 25%;
+        background: #efefef;
+    }
+
+    .topSelling_box .items .info {
+        width: 75%;
+    }
+}
+
+@media(max-width:768px){
+
+    .topSelling_box .items .img {
+        width: 30%;
+        background: #efefef;
+    }
+
+    .topSelling_box .items .info {
+        width: 70%;
+    }
+}

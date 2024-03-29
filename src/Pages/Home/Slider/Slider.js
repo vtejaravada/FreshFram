@@ -36,7 +36,7 @@ const HomeSlider = () => {
                                 <div className="item">
                                     {index === 0 && (
                                         <>
-                                            <div className="info">
+                                            <div className="infoBan">
                                                 <h2 className='mb-4'>Don't miss amazing<br /> grocery deals</h2>
                                                 <p>Sign up for the daily newsletter</p>
 

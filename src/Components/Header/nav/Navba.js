@@ -25,7 +25,7 @@ const Nav = (props) => {
 
     return (
         <div className="nav d-flex align-items-center">
-            <div className="container-fluid">
+            <div className="container-fluid side_menu">
                 <div className="row position-relative navbarLine">
 
                     <div className="part1 d-flex align-items-center  position-static browse ">
@@ -55,7 +55,7 @@ const Nav = (props) => {
                         
                     </div>
 
-                    <div className="part2 position-static">
+                    <div className="part2">
                         <nav className='navItems'>
                             <ul className="list list-inline listNav mb-0">
 
@@ -76,7 +76,7 @@ const Nav = (props) => {
 
                                             <li className="list-inline-item listNav" key={index}>
                                                     <Link to={`/cat/${item.cat_name.toLowerCase()}`} onClick={() => sessionStorage.setItem('cat', item.cat_name.toLowerCase())}>
-                                                        {item.cat_name}
+                                                        {item.cat_name}<IoIosArrowDown className='arrow' />
                                                     </Link>
                                                 {
                                                     item.items.length !== 0 &&
@@ -111,7 +111,7 @@ const Nav = (props) => {
                                                 props.data.length !== 0 &&
                                                 props.data.map((item, index) => {
                                                     return (
-                                                        <div key={index} className="col">
+                                                        <div key={index} className="megamenu_Part">
                                                             <Link to={`/cat/${item.cat_name.toLowerCase()}`}>
                                                                 <h4 className='text-g text-capitalize'>
                                                                     {item.cat_name}
@@ -119,7 +119,7 @@ const Nav = (props) => {
                                                             </Link>
                                                             {
                                                                 item.items.length !== 0 &&
-                                                                <ul className=" ">
+                                                                <ul className=" megamenu_drop ">
                                                                     {
                                                                         item.items.map((item_, index_) => {
                                                                             return (
@@ -138,8 +138,8 @@ const Nav = (props) => {
                                                 })
                                             }
 
-                                            <div className="col megaImg">
-                                                <img src={megamenuimg} alt="" className='w-100 megaImgOnText' />
+                                            <div className=" megaImg">
+                                                <img src={megamenuimg} alt="" className=' megaImgOnText' />
                                                 <div className="megaImgText">
                                                     <p>HOT DEALS</p>
                                                     <h4>Don't miss Trending</h4>
@@ -150,9 +150,7 @@ const Nav = (props) => {
                                         </div>
                                     </div>
                                 </li>
-                                <li className="list-inline-item listNav">
-                                    <Link to="/about">About</Link>
-                                </li>
+                                
                                 <li className="list-inline-item listNav">
                                    <Link to="/about">Blog <IoIosArrowDown className='arrow' /></Link>
 
@@ -171,6 +169,9 @@ const Nav = (props) => {
                                             <li><Link to="/about">404 page</Link></li>
                                         </ul>
                                     </div>
+                                </li>
+                                <li className="list-inline-item listNav">
+                                    <Link to="/about">About</Link>
                                 </li>
 
                                 <li className="list-inline-item listNav">
