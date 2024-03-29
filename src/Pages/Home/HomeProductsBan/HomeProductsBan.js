@@ -37,12 +37,12 @@ const HomeProductsBan = (props) => {
 
         useEffect(()=>{
             prodData.length!==0 &&
-            prodData.map((item)=>{
+            prodData.map((item,index)=>{
                  if(item.cat_name ==="Fashion"){
                      item.items.length!==0 &&
-                     item.items.map((item_)=>{
+                     item.items.map((item_, index_)=>{
                          item_.products.length!==0 &&
-                         item_.products.map((product)=>{
+                         item_.products.map((product, index)=>{
                             bestSellsArr.push(product);
                              
                          })

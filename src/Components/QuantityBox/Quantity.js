@@ -7,7 +7,7 @@ import { IoIosArrowUp } from "react-icons/io";
 const Quantity = (props) => {
 
     const [inputValue, setinputValue] = useState(1);
-    const [ setcartItems] = useState([]);
+    const [cartItems, setcartItems] = useState([]);
 
     useEffect(() => {
         setcartItems(props.cartItems);

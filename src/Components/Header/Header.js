@@ -5,6 +5,7 @@ import { CiSearch } from "react-icons/ci";
 import Select from '../selectDrop/Select';
 import Navba from '../Header/nav/Navba';
 import axios from 'axios';
+// import { IoLocationOutline } from "react-icons/io5";
 import IconCompare from '../../assets/images/icon-compare.svg';
 import IconHeart from '../../assets/images/icon-heart.svg';
 import IconCart from '../../assets/images/icon-cart.svg';
@@ -21,12 +22,13 @@ import { ClickAwayListener } from '@mui/base/ClickAwayListener';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { MyContext } from '../../App';
+import MenuIcon from '@mui/icons-material/Menu';
 
 const Header = (props) => {
 
     const [isOpenDropDown, setisOpenDropDown] = useState(false);
-
     const headerRef = useRef();
+
     const context = useContext(MyContext);
     const history = useNavigate();
 
@@ -45,67 +47,28 @@ const Header = (props) => {
     ]);
 
     //Location -----------------
-    const [countryList, setCountryList] = useState([]);
+    const [countryList] = useState([]);
 
     useEffect(() => {
         const getCountry = async (url) => {
-          try {
-            const response = await axios.get(url);
-            if (response !== null) {
-              const countries = response.data.data.map((item) => item.country);
-              setCountryList(countries);
-              console.log(countries); // Log the country list to check if it's populated
+            try {
+                await axios.get(url).then((response) => {
+                    if (response !== null) {
+                        // console.log(res.data.data);
+                        response.data.data.map((item, index) => {
+                            countryList.push(item.country);
+                        })
+
+                        // console.log(res.data.data.country)
+                    }
+                })
+            } catch (error) {
+                console.log(error.message);
             }
-          } catch (error) {
-            console.log(error.message);
-          }
         };
+
         getCountry('https://countriesnow.space/api/v0.1/countries/');
-      }, []);
-      
-    
-
-    // useEffect(() => {
-    //     const getCountry = async (url) => {
-    //         try {
-    //             await axios.get(url).then((response) => {
-    //                 if (response !== null) {
-    //                     // console.log(res.data.data);
-    //                     response.data.data.map((item) => {
-    //                         countryList.push(item.country);
-    //                     })
-
-    //                     // console.log(res.data.data.country)
-    //                 }
-    //             })
-    //         } catch (error) {
-    //             console.log(error.message);
-    //         }
-    //     };
-
-    //     getCountry('https://countriesnow.space/api/v0.1/countries/');
-    // }, [countryList]);
-
-    //--------------------------------------------//
-
-    // useEffect(() => {
-    //     const getCountry = async (url) => {
-    //         try {
-    //             const response = await axios.get(url);
-    //             if (response !== null) {
-    //                 const countries = response.data.data.map((item, index) => {
-    //                     return item.country;
-    //                 });
-    //                 setCountryList(countries); // Set countryList state
-    //             }
-    //         } catch (error) {
-    //             console.log(error.message);
-    //         }
-    //     };
-
-    //     getCountry('https://countriesnow.space/api/v0.1/countries/');
-    // }, []);
-
+    }, [countryList]);
 
     //Scroll By top-----------------------
 
@@ -135,7 +98,7 @@ const Header = (props) => {
                         <div className="row HeaderRow">
 
                             <div className="logo partHead1 d-flex align-items-center">
-                                <Link to="/"><img src={logo} alt="logo" /></Link>
+                                <Link to="/"><img src={logo} alt="" /></Link>
                             </div>
 
                             {/* headerSearch  start here */}
@@ -157,14 +120,14 @@ const Header = (props) => {
                                         <ul className='list list-inline mb-0 headerTabs'>
 
                                             <li className='countryWrapper'>
-                                            <Select data={countryList} placeholder={'Your Location'} icon={<LocationOnOutlinedIcon style={{ opacity: '0.5' }} />} />
+                                                <Select data={countryList} placeholder={'Your Location'} icon={<LocationOnOutlinedIcon style={{ opacity: '0.5' }} />} />
                                             </li>
 
                                             <li className='list-inline-item icon'>
 
                                                 <Link to={'/'}>
-                                                    <img src={IconCompare} alt="IconCompare" />
-                                                    <span className='pro-count blue' >3</span>
+                                                    <img src={IconCompare} />
+                                                    <span className='pro-count blue'>3</span>
                                                 </Link>
                                                 <Link to={'/'} className='iconCom'>
                                                     <span className='lable'>Compare</span>
@@ -173,8 +136,8 @@ const Header = (props) => {
                                             </li>
                                             <li className='list-inline-item icon'>
                                                 <Link to={'/'}>
-                                                    <img src={IconHeart} alt="IconHeart" />
-                                                    <span className='pro-count blue' >3</span>
+                                                    <img src={IconHeart} />
+                                                    <span className='pro-count blue'>3</span>
                                                 </Link>
                                                 <Link to={'/'} className='iconCom'>
                                                     <span className='lable'>Wishlist</span>
@@ -182,7 +145,7 @@ const Header = (props) => {
                                             </li>
                                             <li className='list-inline-item icon'>
                                                 <Link to={'/cart'}>
-                                                    <img src={IconCart} alt="IconCart" />
+                                                    <img src={IconCart} />
                                                     <span className='pro-count blue'>{context.cartItems.length}</span>
                                                 </Link>
                                                 <Link to={'/'} className='iconCom'>
@@ -197,7 +160,7 @@ const Header = (props) => {
 
                                                         <span onClick={() => setisOpenDropDown(!isOpenDropDown)} className='icon'>
                                                             <Link >
-                                                                <img src={IconUser} alt="IconUser" />
+                                                                <img src={IconUser} />
                                                                 {/* <span className='pro-count blue'></span> */}
                                                             </Link>
 

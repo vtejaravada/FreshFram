@@ -8,7 +8,7 @@ import { Button } from '@mui/material';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
 
-// import { initializeApp } from "firebase/app";
+import { initializeApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { app } from '../../firebase';
 

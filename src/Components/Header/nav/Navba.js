@@ -17,7 +17,7 @@ const Nav = (props) => {
 
     useEffect(() => {
 
-        setNavData(props.data); 
+        setNavData(props.data);
 
     }, []);
 

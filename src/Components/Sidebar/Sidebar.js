@@ -7,9 +7,12 @@ import Banner from '../../assets/images/slider1.jpg';
 import proIcon1 from '../../assets/images/Icon/proIcon1.png';
 import FilterIcon from '../../assets/images/FilterIcon.png';
 
+import Checkbox from '@mui/material/Checkbox';
+
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
-
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
 import Radio from '@mui/material/Radio';
 
 import RangeSlider from 'react-range-slider-input';
@@ -27,7 +30,7 @@ function valuetext(value) {
     const Sidebar = (props)=> {
 
         const [value, setValue] = React.useState([20, 100000]);
-        const [ setValue2] = useState(0);
+        const [value2, setValue2] = useState(0);
         const [totalLength, setTotalLength] = useState([]);
         const [brandFilters, setBrandFilters] = React.useState([]);
         const [ratingsArr, setRatings] = React.useState([]);
@@ -69,7 +72,7 @@ function valuetext(value) {
 
         useEffect(()=>{
             props.data.length !== 0 &&
-            props.data.map((item)=>{
+            props.data.map((item, index)=>{
                 item.items.length!==0 &&
                 item.items.map((item_)=>{
                     catLength+=item_.products.length
@@ -88,7 +91,7 @@ function valuetext(value) {
         useEffect(() => {
             var price = 0;
             props.currentCatData.length !==0 &&
-            props.currentCatData.map((item)=>{
+            props.currentCatData.map((item, index)=>{
                 let prodPrice = parseInt(item.price.toString().replace(/,/g, ""));
                 if(prodPrice > price) {
                     price = prodPrice

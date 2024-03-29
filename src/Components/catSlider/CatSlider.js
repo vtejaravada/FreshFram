@@ -47,7 +47,7 @@ const CatSlider = (props) => {
                     })
                 lengthArr.push(catLength)
                 catLength = 0;
-            }) 
+            })
 
         const list = lengthArr.filter((item, index) => lengthArr.indexOf(item) === index);
         setTotalLength(list)
