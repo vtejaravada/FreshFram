@@ -90,7 +90,7 @@ const Footer = () => {
 
           <div className="footerHead">
             <div className=" partFoot">
-              <Link to='/'><img src={logo} alt='logo' width={250} /></Link>
+              <Link to='/'><img src={logo} alt='log' width={250} /></Link>
               <br />
               <div className="partFootFi">
                 <p>Asesome grocery store website template</p>

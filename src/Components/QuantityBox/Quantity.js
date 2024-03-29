@@ -1,77 +1,52 @@
-import React, { useEffect, useState } from 'react'
-
-
-import { IoIosArrowDown } from "react-icons/io";
-import { IoIosArrowUp } from "react-icons/io";
+import React, { useState } from 'react';
+import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 
 const Quantity = (props) => {
+    const [inputValue, setInputValue] = useState(1);
 
-    const [inputValue, setinputValue] = useState(1);
-    const [cartItems, setcartItems] = useState([]);
+    const updateCart = (items) => {
+        props.updateCart(items);
+    };
 
-    useEffect(() => {
-        setcartItems(props.cartItems);
-        //setinputValue(props.item.quantity)
-    }, [props.cartItems])
-
-    const updateCart=(items)=>{
-        props.updateCart(items)
-    }
-
-    // const plus = () => {
-    //     setinputValue(inputValue + 1)
-    // }
-
-    // const minus = () => {
-    //     if (inputValue !== 1) {
-    //         setinputValue(inputValue - 1)
-    //     }
-    // }
-
-  return (
-    <>
-        <div className="addCartSection pt-4 pb-4 d-flex align-items-center">
-
-            <div className="counterSec me-3">
-                {/* <input type="number" value={inputValue} /> */}
-                <input type="number" value={inputValue} onChange={(e) => setinputValue(parseInt(e.target.value) || 1)} />
-                <span className="arrow plus" 
-                    onClick={
-                        () => {
-                            setinputValue(inputValue + 1);
-                            const _cart = props.cartItems?.map((cartItem, key) => {
-                                return key === parseInt(props.index) ? { ...cartItem, quantity: inputValue+1 } : {...cartItem}
-
-                            });
-                                
-                            updateCart(_cart);
-                            setcartItems(_cart);
-                        }
-                    } 
-                ><IoIosArrowUp style={{ fontSize: 20}}/></span>
-                
-                <span className="arrow minus" 
-                    onClick={
-                        () => {
+    return (
+        <>
+            <div className="addCartSection pt-4 pb-4 d-flex align-items-center">
+                <div className="counterSec me-3">
+                    <input type="number" value={inputValue} onChange={(e) => setInputValue(parseInt(e.target.value) || 1)} />
+                    <span
+                        className="arrow plus"
+                        onClick={() => {
+                            const updatedValue = inputValue + 1;
+                            setInputValue(updatedValue);
+                            const updatedCart = props.cartItems.map((cartItem, key) =>
+                                key === parseInt(props.index) ? { ...cartItem, quantity: updatedValue } : { ...cartItem }
+                            );
+                            updateCart(updatedCart);
+                        }}
+                    >
+                        <IoIosArrowUp style={{ fontSize: 20 }} />
+                    </span>
+                    <span
+                        className="arrow minus"
+                        onClick={() => {
                             if (inputValue !== 1) {
-                                setinputValue(inputValue - 1)
+                                const updatedValue = inputValue - 1;
+                                setInputValue(updatedValue);
+                                const updatedCart = props.cartItems.map((cartItem, key) =>
+                                    key === parseInt(props.index)
+                                        ? { ...cartItem, quantity: cartItem.quantity !== 1 ? updatedValue : cartItem.quantity }
+                                        : { ...cartItem }
+                                );
+                                updateCart(updatedCart);
                             }
-                            
-                            const _cart = props.cartItems?.map((cartItem, key) => {
-                                return key === parseInt(props.index) ? { ...cartItem, quantity: cartItem.quantity !== 1 ? inputValue-1 : cartItem.quantity } : {...cartItem}
-                            });
-
-                            updateCart(_cart);
-                            setcartItems(_cart);
-
-                        }
-                    }
-                ><IoIosArrowDown style={{ fontSize: 20}} /></span>
+                        }}
+                    >
+                        <IoIosArrowDown style={{ fontSize: 20 }} />
+                    </span>
+                </div>
             </div>
+        </>
+    );
+};
 
-        </div>
-    </>
-  )
-}
-
-export default Quantity
+export default Quantity;

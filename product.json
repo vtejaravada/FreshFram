@@ -1349,11 +1349,43 @@
       "rating": "5",
       "productId": "8",
       "date": "20/3/2024, 9:20:00 pm"
+    },
+    {
+      "id": "43d8",
+      "review": "hello",
+      "userName": "teja",
+      "rating": "4",
+      "productId": "1",
+      "date": "29/3/2024, 6:56:46 pm"
+    },
+    {
+      "id": "cf40",
+      "review": "good",
+      "userName": "Rinku",
+      "rating": "5",
+      "productId": "4",
+      "date": "29/3/2024, 8:39:56 pm"
+    },
+    {
+      "id": "1a7c",
+      "review": "good product",
+      "userName": "priya",
+      "rating": "5",
+      "productId": "36",
+      "date": "29/3/2024, 11:15:55 pm"
+    },
+    {
+      "id": "0d86",
+      "review": "Good product Tecno Pop 7 Pro 64 GB",
+      "userName": "sana",
+      "rating": "4",
+      "productId": "37",
+      "date": "29/3/2024, 11:26:34 pm"
     }
   ],
   "cartItems": [
     {
-      "id": "45",
+      "id": 45,
       "productName": "Mid-Rise Skinny Fit Jeans",
       "price": "269.00",
       "oldPrice": "899.00",
@@ -1378,36 +1410,63 @@
       ],
       "rating": 5,
       "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. ",
-      "parentCatName": "Fashion",
-      "subCatName": "Men Western Wear",
       "quantity": 1
     },
     {
-      "id": "46",
-      "productName": "Plutus Men Black Solid Polyester Casual Jacket M",
-      "price": "499.00",
-      "oldPrice": "699.00",
-      "weight": [],
-      "RAM": [],
-      "SIZE": [
-        "M",
-        "L",
-        "XL"
+      "id": 2,
+      "productName": "Moong Dal 2 kg",
+      "price": "246",
+      "oldPrice": "320",
+      "weight": [
+        50,
+        100,
+        150,
+        200,
+        250,
+        500
       ],
-      "catImg": "https://www.jiomart.com/images/product/original/rvurcwrojo/plutus-men-black-solid-polyester-casual-jacket-m-product-images-rvurcwrojo-0-202209240106.jpg",
-      "discount": "60",
-      "brand": "PLUTUS",
+      "catImg": "https://www.jiomart.com/images/product/original/491432711/moong-dal-2-kg-product-images-o491432711-p491432711-0-202205191636.jpg",
+      "discount": "16",
+      "brand": "Private Label",
+      "type": "best",
       "productImages": [
-        "https://www.jiomart.com/images/product/original/rvurcwrojo/plutus-men-black-solid-polyester-casual-jacket-m-product-images-rvurcwrojo-0-202209240106.jpg",
-        "https://www.jiomart.com/images/product/original/rvurcwrojo/plutus-men-black-solid-polyester-casual-jacket-m-product-images-rvurcwrojo-1-202209240106.jpg",
-        "https://www.jiomart.com/images/product/original/rvurcwrojo/plutus-men-black-solid-polyester-casual-jacket-m-product-images-rvurcwrojo-2-202209240106.jpg",
-        "https://www.jiomart.com/images/product/original/rvurcwrojo/plutus-men-black-solid-polyester-casual-jacket-m-product-images-rvurcwrojo-3-202209240106.jpg",
-        "https://www.jiomart.com/images/product/original/rvurcwrojo/plutus-men-black-solid-polyester-casual-jacket-m-product-images-rvurcwrojo-4-202209240106.jpg"
+        "https://www.jiomart.com/images/product/original/491432711/moong-dal-2-kg-product-images-o491432711-p491432711-0-202205191636.jpg",
+        "https://www.jiomart.com/images/product/original/491432711/moong-dal-2-kg-product-images-o491432711-p491432711-1-202205191636.jpg",
+        "https://www.jiomart.com/images/product/original/491432711/moong-dal-2-kg-legal-images-o491432711-p491432711-3-202205191636.jpg"
       ],
-      "rating": 5,
-      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. ",
-      "parentCatName": "Fashion",
-      "subCatName": "Men Western Wear",
+      "rating": 4,
+      "description": "Moong Dal is essentially packed with loads of nutrients that are extremely beneficial for your health. Moong contains almost every important element that your body might need. Buy Moong Dal online today.",
+      "parentCatName": "groceries",
+      "subCatName": "dals and pulses",
+      "quantity": 1
+    },
+    {
+      "id": 1,
+      "productName": "Good Life Whole Moong 500 g",
+      "price": "20",
+      "oldPrice": "140",
+      "weight": [
+        50,
+        100,
+        150,
+        200,
+        250,
+        500
+      ],
+      "catImg": "https://www.jiomart.com/images/product/original/491187309/good-life-whole-moong-500-g-product-images-o491187309-p491187309-0-202308311426.jpg",
+      "discount": "12",
+      "brand": "AASHIRVAAD",
+      "type": "sale",
+      "productImages": [
+        "https://www.jiomart.com/images/product/original/491187309/good-life-whole-moong-500-g-product-images-o491187309-p491187309-0-202308311426.jpg",
+        "https://www.jiomart.com/images/product/original/491187309/good-life-whole-moong-500-g-product-images-o491187309-p491187309-1-202308311426.jpg",
+        "https://www.jiomart.com/images/product/original/491187309/good-life-whole-moong-500-g-product-images-o491187309-p491187309-2-202308311426.jpg",
+        "https://www.jiomart.com/images/product/original/491187309/good-life-whole-moong-500-g-product-images-o491187309-p491187309-3-202308311426.jpg",
+        "https://www.jiomart.com/images/product/original/491187309/good-life-whole-moong-500-g-product-images-o491187309-p491187309-4-202308311426.jpg",
+        "https://www.jiomart.com/images/product/original/491187309/good-life-whole-moong-500-g-legal-images-o491187309-p491187309-5-202308311427.jpg"
+      ],
+      "rating": 3.5,
+      "description": "Good Life Whole Moong is one of the light meal to digest. It is often given to people who prefer diet for fitness. It contains antioxidants which are very healthy for the good functioning of the human body. It can be included in our daily diet as it can fulfil the nutritional and dietary requirements of an entire meal. Buy Good Life Whole Moong online now!",
       "quantity": 1
     },
     {

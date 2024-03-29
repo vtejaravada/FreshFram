@@ -22,7 +22,7 @@ import { ClickAwayListener } from '@mui/base/ClickAwayListener';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { MyContext } from '../../App';
-import MenuIcon from '@mui/icons-material/Menu';
+// import MenuIcon from '@mui/icons-material/Menu';
 
 const Header = (props) => {
 
@@ -55,7 +55,7 @@ const Header = (props) => {
                 await axios.get(url).then((response) => {
                     if (response !== null) {
                         // console.log(res.data.data);
-                        response.data.data.map((item, index) => {
+                        response.data.data.forEach((item, index) => {
                             countryList.push(item.country);
                         })
 
@@ -98,7 +98,7 @@ const Header = (props) => {
                         <div className="row HeaderRow">
 
                             <div className="logo partHead1 d-flex align-items-center">
-                                <Link to="/"><img src={logo} alt="" /></Link>
+                                <Link to="/"><img src={logo} alt="logo" /></Link>
                             </div>
 
                             {/* headerSearch  start here */}
@@ -126,7 +126,7 @@ const Header = (props) => {
                                             <li className='list-inline-item icon'>
 
                                                 <Link to={'/'}>
-                                                    <img src={IconCompare} />
+                                                    <img src={IconCompare} alt="IconCompare" />
                                                     <span className='pro-count blue'>3</span>
                                                 </Link>
                                                 <Link to={'/'} className='iconCom'>
@@ -136,7 +136,7 @@ const Header = (props) => {
                                             </li>
                                             <li className='list-inline-item icon'>
                                                 <Link to={'/'}>
-                                                    <img src={IconHeart} />
+                                                    <img src={IconHeart} alt="IconHeart" />
                                                     <span className='pro-count blue'>3</span>
                                                 </Link>
                                                 <Link to={'/'} className='iconCom'>
@@ -145,7 +145,7 @@ const Header = (props) => {
                                             </li>
                                             <li className='list-inline-item icon'>
                                                 <Link to={'/cart'}>
-                                                    <img src={IconCart} />
+                                                    <img src={IconCart} alt="IconCart" />
                                                     <span className='pro-count blue'>{context.cartItems.length}</span>
                                                 </Link>
                                                 <Link to={'/'} className='iconCom'>
@@ -160,7 +160,7 @@ const Header = (props) => {
 
                                                         <span onClick={() => setisOpenDropDown(!isOpenDropDown)} className='icon'>
                                                             <Link >
-                                                                <img src={IconUser} />
+                                                                <img src={IconUser} alt="IconUser" />
                                                                 {/* <span className='pro-count blue'></span> */}
                                                             </Link>
 

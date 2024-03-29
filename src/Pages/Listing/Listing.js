@@ -18,14 +18,14 @@ const Listing = (props) => {
 
     useEffect(() => {
         props.data.length !== 0 &&
-            props.data.map((item) => {
+            props.data.forEach((item) => {
                 //page == single cat
                 if (props.single === true) {
                     if (item.cat_name.toLowerCase() === id.toLowerCase()) {
                         item.items.length !== 0 &&
-                            item.items.map((item_) => {
+                            item.items.forEach((item_) => {
                                 item_.products.length !== 0 &&
-                                    item_.products.map((product) => {
+                                    item_.products.forEach((product) => {
                                         itemsData.push(product);
                                     })
                             })
@@ -34,10 +34,10 @@ const Listing = (props) => {
                 //page == double cat
                 else {
                     item.items.length !== 0 &&
-                        item.items.map((item_, index_) => {
+                        item.items.forEach((item_, index_) => {
                             if (item_.cat_name.split(' ').join('-').toLowerCase() === id.toLocaleLowerCase())
                                 item_.products.length !== 0 &&
-                                    item_.products.map((product) => {
+                                    item_.products.forEach((product) => {
                                         itemsData.push(product);
                                     })
                         })
@@ -52,14 +52,14 @@ const Listing = (props) => {
     const filterByBrand = (keyword) => {
 
         props.data.length !== 0 &&
-            props.data.map((item, index) => {
+            props.data.forEach((item, index) => {
 
                 //page == single cat
                 if (props.single === true) {
 
                     item.items.length !== 0 &&
-                        item.items.map((item_) => {
-                            item_.products.map((item__, index__) => {
+                        item.items.forEach((item_) => {
+                            item_.products.forEach((item__, index__) => {
                                 if (item__.brand.toLowerCase() === keyword.toLowerCase()) {
                                     //console.log(item__)
                                     itemsData.push({ ...item__, parentCatName: item.cat_name, subCatName: item_.cat_name })
@@ -75,10 +75,10 @@ const Listing = (props) => {
                 //page == double cat
                 else {
                     item.items.length !== 0 &&
-                        item.items.map((item_, index_) => {
+                        item.items.forEach((item_, index_) => {
                             // console.log(item_.cat_name.replace(/[^A-Za-z]/g,"-").toLowerCase())
                             if (item_.cat_name.split(' ').join('-').toLowerCase() == id.split(' ').join('-').toLowerCase()) {
-                                item_.products.map((item__, index__) => {
+                                item_.products.forEach((item__, index__) => {
                                     if (item__.brand.toLowerCase() === keyword.toLowerCase()) {
                                         itemsData.push({ ...item__, parentCatName: item.cat_name, subCatName: item_.cat_name })
                                     }
@@ -104,15 +104,15 @@ const Listing = (props) => {
     const filterByPrice = (minValue, maxValue) => {
 
         props.data.length !== 0 &&
-            props.data.map((item, index) => {
+            props.data.forEach((item, index) => {
 
                 //page == single cat
                 if (props.single === true) {
                     if (id === item.cat_name.toLowerCase()) {
                         item.items.length !== 0 &&
-                            item.items.map((item_) => {
+                            item.items.forEach((item_) => {
                                 item_.products.length !== 0 &&
-                                    item_.products.map((product) => {
+                                    item_.products.forEach((product) => {
 
                                         let price = parseInt(product.price.toString().replace(/,/g, ""))
                                         if (minValue <= price && maxValue >= price) {
@@ -126,9 +126,9 @@ const Listing = (props) => {
 
                 else {
                     item.items.length !== 0 &&
-                        item.items.map((item_, index_) => {
+                        item.items.forEach((item_, index_) => {
                             if (item_.cat_name.split(' ').join('-').toLowerCase() == id.split(' ').join('-').toLowerCase()) {
-                                item_.products.map((product) => {
+                                item_.products.forEach((product) => {
                                     let price = parseInt(product.price.toString().replace(/,/g, ""))
                                     if (minValue <= price && maxValue >= price) {
                                         itemsData.push({ ...product, parentCatName: item.cat_name, subCatName: item_.cat_name })
@@ -147,14 +147,14 @@ const Listing = (props) => {
     const filterByRating = (keyword) => {
 
         props.data.length !== 0 &&
-            props.data.map((item, index) => {
+            props.data.forEach((item, index) => {
 
                 //page == single cat
                 if (props.single === true) {
 
                     item.items.length!== 0 &&
-                    item.items.map((item_)=>{
-                        item_.products.map((item__)=>{
+                    item.items.forEach((item_)=>{
+                        item_.products.forEach((item__)=>{
                             let rating = parseFloat(item__.rating);
                             if(rating === keyword){
                                 itemsData.push({...item__, parentCatName:item.cat_name, subCatName:item_.cat_name})
@@ -165,10 +165,10 @@ const Listing = (props) => {
                 //page == double cat
                 else {
                     item.items.length !== 0 &&
-                        item.items.map((item_, index_) => {
+                        item.items.forEach((item_, index_) => {
                             // console.log(item_.cat_name.replace(/[^A-Za-z]/g,"-").toLowerCase())
                             if (item_.cat_name.split(' ').join('-').toLowerCase() == id.split(' ').join('-').toLowerCase()) {
-                                item_.products.map((item__, index__) => {
+                                item_.products.forEach((item__, index__) => {
                                     let rating = parseFloat(item__.rating);
                                     if(rating === keyword){
                                         itemsData.push({ ...item__, parentCatName: item.cat_name, subCatName: item_.cat_name })
