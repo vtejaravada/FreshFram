@@ -16,37 +16,88 @@ const Listing = (props) => {
 
     var itemsData = [];
 
+    // useEffect(() => {
+    //     props.data.length !== 0 &&
+    //         props.data.map((item) => {
+    //             //page == single cat
+    //             if (props.single === true) {
+    //                 if (item.cat_name.toLowerCase() === id.toLowerCase()) {
+    //                     item.items.length !== 0 &&
+    //                         item.items.map((item_) => {
+
+    //                             return(
+    //                                 item_.products.length !== 0 &&
+    //                                 item_.products.map((product) => {
+    //                                     itemsData.push(product);
+    //                                 })
+    //                             )
+    //                         })
+    //                 }
+    //             }
+    //             //page == double cat
+    //             else {
+    //                 item.items.length !== 0 &&
+    //                     item.items.map((item_, index_) => {
+                            
+    //                         if (item_.cat_name.split(' ').join('-').toLowerCase() === id.toLocaleLowerCase())
+    //                             item_.products.length !== 0 &&
+    //                                 item_.products.map((product) => {
+    //                                     itemsData.push(product);
+    //                                 })
+    //                     })
+    //             }
+    //         })
+    //     const list2 = itemsData.filter((item, index) => itemsData.indexOf(item) === index);
+    //     setData(list2);
+    // }, [id])
+
+
     useEffect(() => {
-        props.data.length !== 0 &&
+        let itemsData = [];
+    
+        if (props.data.length !== 0) {
             props.data.forEach((item) => {
-                //page == single cat
+                // page == single cat
                 if (props.single === true) {
                     if (item.cat_name.toLowerCase() === id.toLowerCase()) {
-                        item.items.length !== 0 &&
+                        if (item.items.length !== 0) {
                             item.items.forEach((item_) => {
-                                item_.products.length !== 0 &&
+                                if (item_.products.length !== 0) {
                                     item_.products.forEach((product) => {
                                         itemsData.push(product);
-                                    })
-                            })
+                                    });
+                                }
+                            });
+                        }
                     }
                 }
-                //page == double cat
+                // page == double cat
                 else {
-                    item.items.length !== 0 &&
-                        item.items.forEach((item_, index_) => {
-                            if (item_.cat_name.split(' ').join('-').toLowerCase() === id.toLocaleLowerCase())
-                                item_.products.length !== 0 &&
+                    if (item.items.length !== 0) {
+                        item.items.forEach((item_) => {
+                            if (item_.cat_name.split(' ').join('-').toLowerCase() === id.toLowerCase()) {
+                                if (item_.products.length !== 0) {
                                     item_.products.forEach((product) => {
                                         itemsData.push(product);
-                                    })
-                        })
+                                    });
+                                }
+                            }
+                        });
+                    }
                 }
-            })
+            });
+        }
+    
         const list2 = itemsData.filter((item, index) => itemsData.indexOf(item) === index);
         setData(list2);
-    }, [id])
-
+    
+        // Return cleanup function if necessary
+        return () => {
+            // Any cleanup code can go here
+        };
+    }, [id, props.data, props.single]);
+    
+    
 //-------------------------------------------------------------------------------------------
 
     const filterByBrand = (keyword) => {
@@ -77,7 +128,7 @@ const Listing = (props) => {
                     item.items.length !== 0 &&
                         item.items.forEach((item_, index_) => {
                             // console.log(item_.cat_name.replace(/[^A-Za-z]/g,"-").toLowerCase())
-                            if (item_.cat_name.split(' ').join('-').toLowerCase() == id.split(' ').join('-').toLowerCase()) {
+                            if (item_.cat_name.split(' ').join('-').toLowerCase() === id.split(' ').join('-').toLowerCase()) {
                                 item_.products.forEach((item__, index__) => {
                                     if (item__.brand.toLowerCase() === keyword.toLowerCase()) {
                                         itemsData.push({ ...item__, parentCatName: item.cat_name, subCatName: item_.cat_name })
@@ -96,9 +147,12 @@ const Listing = (props) => {
 
 
         setData(list2);
+        
+        window.scrollTo(0,0);
 
-        window.scrollTo(0,0)
-
+        return () => {
+            // Any cleanup code can go here
+        };
     }
 //-------------------------------------------------------------------------------------------
     const filterByPrice = (minValue, maxValue) => {
@@ -127,7 +181,7 @@ const Listing = (props) => {
                 else {
                     item.items.length !== 0 &&
                         item.items.forEach((item_, index_) => {
-                            if (item_.cat_name.split(' ').join('-').toLowerCase() == id.split(' ').join('-').toLowerCase()) {
+                            if (item_.cat_name.split(' ').join('-').toLowerCase() === id.split(' ').join('-').toLowerCase()) {
                                 item_.products.forEach((product) => {
                                     let price = parseInt(product.price.toString().replace(/,/g, ""))
                                     if (minValue <= price && maxValue >= price) {
@@ -142,6 +196,10 @@ const Listing = (props) => {
         const list2 = itemsData.filter((item, index) => itemsData.indexOf(item) === index);
         setData(list2);
         window.scrollTo(0,0)
+
+        return()=>{
+
+        };
     }
 //-------------------------------------------------------------------------------------------
     const filterByRating = (keyword) => {
@@ -167,7 +225,7 @@ const Listing = (props) => {
                     item.items.length !== 0 &&
                         item.items.forEach((item_, index_) => {
                             // console.log(item_.cat_name.replace(/[^A-Za-z]/g,"-").toLowerCase())
-                            if (item_.cat_name.split(' ').join('-').toLowerCase() == id.split(' ').join('-').toLowerCase()) {
+                            if (item_.cat_name.split(' ').join('-').toLowerCase() === id.split(' ').join('-').toLowerCase()) {
                                 item_.products.forEach((item__, index__) => {
                                     let rating = parseFloat(item__.rating);
                                     if(rating === keyword){
@@ -187,6 +245,10 @@ const Listing = (props) => {
         setData(list2);
 
         window.scrollTo(0,0)
+
+        return()=>{
+
+        };
 
     }
 

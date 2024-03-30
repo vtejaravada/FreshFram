@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useCallback  } from 'react';
 import Slider from 'react-slick';
 import '../../Pages/Details/Details.css';
 import Table from 'react-bootstrap/Table';
@@ -32,8 +32,8 @@ const Details = (props) => {
 
     // const [zoomImage, setZoomImage] = useState(Product1)
 
-    const [bigImageSize, setBigImageSize] = useState([1500, 1500]);
-    const [smlImageSize, setSmlImageSize] = useState([150, 150]);
+    const [bigImageSize] = useState([1500, 1500]);
+    const [smlImageSize] = useState([150, 150]);
 
     const [activeSize, setActiveSize] = useState(0);
 
@@ -43,7 +43,7 @@ const Details = (props) => {
 
     const [currentProduct, setCurrentProduct] = useState({})
 
-    const [prodCat, setProdCat] = useState({
+    const [prodCat] = useState({
         parentCat: sessionStorage.getItem('parentCat'),
         subCatName: sessionStorage.getItem('subCatName')
     })
@@ -102,111 +102,142 @@ const Details = (props) => {
         zoomSliderBig.current.slickGoTo(index);
     }
 
+
     const isActive = (index) => {
         setActiveSize(index);
     }
 
-    useEffect(() => {
-        window.scrollTo(0, 0)
+    // useEffect(() => {
+    //     window.scrollTo(0, 0)
 
-        props.data.length !== 0 &&
-            props.data.forEach((item) => {
-                item.items.length !== 0 &&
-                    item.items.forEach((item_) => {
-                        item_.products.length !== 0 &&
-                            item_.products.forEach((product) => {
-                                if (parseInt(product.id) === parseInt(id)) {
-                                    setCurrentProduct(product);
-                                }
-                            })
-                    })
-            })
+    //     props.data.length !== 0 &&
+    //         props.data.forEach((item) => {
+    //             item.items.length !== 0 &&
+    //                 item.items.forEach((item_) => {
+    //                     item_.products.length !== 0 &&
+    //                         item_.products.forEach((product) => {
+    //                             if (parseInt(product.id) === parseInt(id)) {
+    //                                 setCurrentProduct(product);
+    //                             }
+    //                         })
+    //                 })
+    //         })
 
-        //related products code
+    //     //related products code
 
-        const related_products = [];
+    //     const related_products = [];
 
-        props.data.length !== 0 &&
-            props.data.forEach((item) => {
-                if (prodCat.parentCat === item.cat_name) {
-                    item.items.length !== 0 &&
-                        item.items.forEach((item_) => {
-                            if (prodCat.subCatName === item_.cat_name) {
-                                item_.products.length !== 0 &&
-                                    item_.products.forEach((product, index) => {
-                                        if (product.id !== parseInt(id)) {
-                                            related_products.push(product)
-                                        }
+    //     props.data.length !== 0 &&
+    //         props.data.forEach((item) => {
+    //             if (prodCat.parentCat === item.cat_name) {
+    //                 item.items.length !== 0 &&
+    //                     item.items.forEach((item_) => {
+    //                         if (prodCat.subCatName === item_.cat_name) {
+    //                             item_.products.length !== 0 &&
+    //                                 item_.products.forEach((product, index) => {
+    //                                     if (product.id !== parseInt(id)) {
+    //                                         related_products.push(product)
+    //                                     }
 
-                                    })
-                            }
-                        })
-                }
-            })
+    //                                 })
+    //                         }
+    //                     })
+    //             }
 
-        if (related_products.length !== 0) {
-            setRelatedProducts(related_products)
+    //         })
+
+
+    //     if (related_products.length !== 0) {
+    //         setRelatedProducts(related_products)
+    //     }
+
+
+    //     showReviews();
+
+    //     return()=>{
+
+    //     };
+    // }, [id]);
+
+    const showReviews = useCallback(async () => {
+        try {
+            const response = await axios.get("http://localhost:3000/productReviews");
+            const filteredReviews = response.data.filter(item => parseInt(item.productId) === parseInt(id));
+            setReviewsArr(filteredReviews);
+        } catch (error) {
+            console.log(error.message);
         }
-        showReviews();
     }, [id]);
-
+    
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    
+        props.data.forEach((item) => {
+            item.items.forEach((item_) => {
+                item_.products.forEach((product) => {
+                    if (parseInt(product.id) === parseInt(id)) {
+                        setCurrentProduct(product);
+                    }
+                });
+            });
+        });
+    
+        const related_products = [];
+    
+        props.data.forEach((item) => {
+            if (prodCat.parentCat === item.cat_name) {
+                item.items.forEach((item_) => {
+                    if (prodCat.subCatName === item_.cat_name) {
+                        item_.products.forEach((product) => {
+                            if (product.id !== parseInt(id)) {
+                                related_products.push(product);
+                            }
+                        });
+                    }
+                });
+            }
+        });
+    
+        if (related_products.length !== 0) {
+            setRelatedProducts(related_products);
+        }
+    
+        showReviews();
+    }, [id, prodCat.parentCat, prodCat.subCatName, props.data, showReviews]);
+    
     const changeInput = (name, value) => {
         if (name === "rating") {
             setRating(value);
         }
-        setReviewFields(() => ({
-            ...reviewFields,
+        setReviewFields((prevFields) => ({
+            ...prevFields,
             [name]: value,
             productId: id,
             date: new Date().toLocaleString()
-        }))
-    }
-    const reviews_Arr = [];
-
+        }));
+    };
+    
     const submitReview = async (e) => {
         e.preventDefault();
-
+    
         try {
-
-            await axios.post("http://localhost:3000/productReviews", reviewFields).then((response) => {
-                reviews_Arr.push(response.data);
-                setReviewFields(() => ({
-                    review: '',
-                    userName: '',
-                    rating: 0.0,
-                    productId: 0,
-                    date: ''
-                }))
-            })
-
+            const response = await axios.post("http://localhost:3000/productReviews", reviewFields);
+            reviews_Arr.push(response.data);
+            setReviewFields(() => ({
+                review: '',
+                userName: '',
+                rating: 0.0,
+                productId: 0,
+                date: ''
+            }));
+            showReviews();
         } catch (error) {
             console.log(error.message);
         }
+    };
+    
+    var reviews_Arr = [];
 
-        showReviews();
-    }
-
-    var reviews_Arr2 = [];
-    const showReviews = async () => {
-        try {
-            await axios.get("http://localhost:3000/productReviews").then((response) => {
-                if (response.data.length !== 0) {
-                    response.data.forEach((item) => {
-                        if (parseInt(item.productId) === parseInt(id)) {
-                            reviews_Arr2.push(item)
-                        }
-                    })
-                }
-            })
-        } catch (error) {
-            console.log(error.message);
-        }
-
-        if (reviews_Arr2.length !== 0) {
-
-            setReviewsArr(reviews_Arr2);
-        }
-    }
     return (
         <>
             <section className="detailsPage md-5">

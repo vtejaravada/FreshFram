@@ -1385,63 +1385,7 @@
   ],
   "cartItems": [
     {
-      "id": 45,
-      "productName": "Mid-Rise Skinny Fit Jeans",
-      "price": "269.00",
-      "oldPrice": "899.00",
-      "weight": [],
-      "RAM": [],
-      "SIZE": [
-        28,
-        30,
-        32,
-        34
-      ],
-      "catImg": "https://www.jiomart.com/images/product/original/420434311_blue/skinny-jeans-with-button-closure-model-420434311_blue-0-202308081627.jpg",
-      "discount": "49",
-      "brand": "Fort Collins",
-      "type": "new",
-      "productImages": [
-        "https://www.jiomart.com/images/product/original/420434311_blue/skinny-jeans-with-button-closure-model-420434311_blue-0-202308081627.jpg",
-        "https://www.jiomart.com/images/product/original/420434311_blue/skinny-jeans-with-button-closure-model2-420434311_blue-2-202308081627.jpg",
-        "https://www.jiomart.com/images/product/original/420434311_blue/skinny-jeans-with-button-closure-model3-420434311_blue-3-202308081627.jpg",
-        "https://www.jiomart.com/images/product/original/420434311_blue/skinny-jeans-with-button-closure-model4-420434311_blue-4-202308081627.jpg",
-        "https://www.jiomart.com/images/product/original/420434311_blue/skinny-jeans-with-button-closure-model5-420434311_blue-5-202308081627.jpg"
-      ],
-      "rating": 5,
-      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. ",
-      "quantity": 1
-    },
-    {
-      "id": 2,
-      "productName": "Moong Dal 2 kg",
-      "price": "246",
-      "oldPrice": "320",
-      "weight": [
-        50,
-        100,
-        150,
-        200,
-        250,
-        500
-      ],
-      "catImg": "https://www.jiomart.com/images/product/original/491432711/moong-dal-2-kg-product-images-o491432711-p491432711-0-202205191636.jpg",
-      "discount": "16",
-      "brand": "Private Label",
-      "type": "best",
-      "productImages": [
-        "https://www.jiomart.com/images/product/original/491432711/moong-dal-2-kg-product-images-o491432711-p491432711-0-202205191636.jpg",
-        "https://www.jiomart.com/images/product/original/491432711/moong-dal-2-kg-product-images-o491432711-p491432711-1-202205191636.jpg",
-        "https://www.jiomart.com/images/product/original/491432711/moong-dal-2-kg-legal-images-o491432711-p491432711-3-202205191636.jpg"
-      ],
-      "rating": 4,
-      "description": "Moong Dal is essentially packed with loads of nutrients that are extremely beneficial for your health. Moong contains almost every important element that your body might need. Buy Moong Dal online today.",
-      "parentCatName": "groceries",
-      "subCatName": "dals and pulses",
-      "quantity": 1
-    },
-    {
-      "id": 1,
+      "id": "1",
       "productName": "Good Life Whole Moong 500 g",
       "price": "20",
       "oldPrice": "140",
@@ -1470,7 +1414,7 @@
       "quantity": 1
     },
     {
-      "id": 2,
+      "id": "2",
       "productName": "Moong Dal 2 kg",
       "price": "246",
       "oldPrice": "320",

@@ -8,7 +8,7 @@ import { Button } from '@mui/material';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
 
-import { initializeApp } from "firebase/app";
+// import { initializeApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { app } from '../../firebase';
 
@@ -32,7 +32,7 @@ const SignUp = () => {
         createUserWithEmailAndPassword(auth, formFields.email, formFields.password)
             .then((userCredential) => {
                 // Signed up 
-                const user = userCredential.user;
+                // const user = userCredential.user;
                 setShowLoader(false);
                 setFormFields({
                     email: '',
@@ -43,8 +43,12 @@ const SignUp = () => {
                 // ...
             })
             .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
+
+                console.error("Error signing in with Google:", error);
+                setShowLoader(false);
+
+                // const errorCode = error.code;
+                // const errorMessage = error.message;
                 // ..
             });
     }

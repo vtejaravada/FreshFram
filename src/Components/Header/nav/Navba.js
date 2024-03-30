@@ -19,7 +19,7 @@ const Nav = (props) => {
 
         setNavData(props.data);
 
-    }, []);
+    }, [props.data]);
 
     
 

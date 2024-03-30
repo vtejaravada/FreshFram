@@ -22,7 +22,6 @@ import { ClickAwayListener } from '@mui/base/ClickAwayListener';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { MyContext } from '../../App';
-// import MenuIcon from '@mui/icons-material/Menu';
 
 const Header = (props) => {
 
@@ -47,28 +46,49 @@ const Header = (props) => {
     ]);
 
     //Location -----------------
-    const [countryList] = useState([]);
+    // const [countryList] = useState([]);
+
+    // useEffect(() => {
+    //     const getCountry = async (url) => {
+    //         try {
+    //             await axios.get(url).then((response) => {
+    //                 if (response !== null) {
+    //                     // console.log(res.data.data);
+    //                     response.data.data.map((item, index) => {
+    //                         countryList.push(item.country);
+    //                     })
+
+    //                     // console.log(res.data.data.country)
+    //                 }
+    //             })
+    //         } catch (error) {
+    //             console.log(error.message);
+    //         }
+    //     };
+
+    //     getCountry('https://countriesnow.space/api/v0.1/countries/');
+    // }, [countryList]);
+
+    const [countryList, setCountryList] = useState([]);
 
     useEffect(() => {
         const getCountry = async (url) => {
             try {
-                await axios.get(url).then((response) => {
-                    if (response !== null) {
-                        // console.log(res.data.data);
-                        response.data.data.forEach((item, index) => {
-                            countryList.push(item.country);
-                        })
-
-                        // console.log(res.data.data.country)
-                    }
-                })
+                const response = await axios.get(url);
+                if (response !== null) {
+                    const countries = response.data.data.map((item) => item.country);
+                    console.log("Fetched country data:", countries); // Log the fetched country data
+                    setCountryList(countries);
+                }
             } catch (error) {
                 console.log(error.message);
             }
         };
 
         getCountry('https://countriesnow.space/api/v0.1/countries/');
-    }, [countryList]);
+    }, []);
+
+    console.log("Country list state:", countryList); // Log the current state of countryList for debugging
 
     //Scroll By top-----------------------
 
@@ -120,8 +140,17 @@ const Header = (props) => {
                                         <ul className='list list-inline mb-0 headerTabs'>
 
                                             <li className='countryWrapper'>
-                                                <Select data={countryList} placeholder={'Your Location'} icon={<LocationOnOutlinedIcon style={{ opacity: '0.5' }} />} />
+                                                <Select
+                                                    data={countryList.map((country, index) => (
+                                                        <option key={country} value={country}>
+                                                            {country}
+                                                        </option>
+                                                    ))}
+                                                    placeholder={'Your Location'}
+                                                    icon={<LocationOnOutlinedIcon style={{ opacity: '0.5' }} />}
+                                                />
                                             </li>
+
 
                                             <li className='list-inline-item icon'>
 
@@ -136,7 +165,7 @@ const Header = (props) => {
                                             </li>
                                             <li className='list-inline-item icon'>
                                                 <Link to={'/'}>
-                                                    <img src={IconHeart} alt="IconHeart" />
+                                                    <img src={IconHeart} alt="IconCart" />
                                                     <span className='pro-count blue'>3</span>
                                                 </Link>
                                                 <Link to={'/'} className='iconCom'>

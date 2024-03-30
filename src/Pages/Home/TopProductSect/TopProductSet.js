@@ -11,7 +11,7 @@ const TopProductSet = () => {
 
                     <div className="topProductSec">
                         <TopProject title="Top Selling"/>
-                    </div>
+                    </div> 
 
                     <div className="topProductSec">
                         <TopProject title="Trending Products"/>

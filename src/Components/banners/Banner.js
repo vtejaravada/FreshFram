@@ -18,7 +18,7 @@ const Banner = () => {
                                 <img  src={image} className="w-100 transition" alt={`Banner ${index + 1}`} />
                             </div>
                         </div>
-                     ))} 
+                     ))}
                 </div>
             </div>
         </div>

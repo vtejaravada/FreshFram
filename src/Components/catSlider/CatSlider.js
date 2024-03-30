@@ -6,21 +6,45 @@ import { Link } from 'react-router-dom';
 const CatSlider = (props) => {
     const [allData] = useState(props.data);
     const [totalLength, setTotalLength] = useState([]);
-    const categoryColors = ['#fffceb', '#ecffec', '#feefea', '#fff3eb', '#fff3ff', '#ffb8cf', '#ffb8f9', '#d7b8ff', '#b8c2ff', '#b8f9ff', '#b8ffc4', '#dcffb8', '#ffe6b8', '#b8ffc9', '#f2ffb8', '#ffb8b8', '#b8d0ff'];
 
-    const lengthRef = useRef([]);
+    const [category] = useState([
+        '#fffceb',
+        '#ecffec',
+        '#fffceb',
+        '#ecffec',
+        '#feefea',
+        '#fff3eb',
+        '#fff3ff',
+        '#ffb8cf',
+        '#ffb8f9',
+        '#d7b8ff',
+        '#b8c2ff',
+        '#b8f9ff',
+        '#b8ffc4',
+        '#dcffb8',
+        '#ffe6b8',
+        '#b8ffc9',
+        '#f2ffb8',
+        '#ffb8b8',
+        '#b8d0ff',
+
+        // Add more categories as needed
+    ]);
+
+    const lengthArr = useRef([]);
     useEffect(() => {
-        let catLength = 0;
-        allData.forEach((item) => {
+        lengthArr.current = allData.map((item) => {
+            let catLength = 0;
             item.items.forEach((item_) => {
                 catLength += item_.products.length;
             });
-            lengthRef.current.push(catLength);
-            catLength = 0;
+            return catLength;
         });
 
-        const uniqueLengths = lengthRef.current.filter((item, index, arr) => arr.indexOf(item) === index);
-        setTotalLength(uniqueLengths);
+        const list = lengthArr.current.filter(
+            (item, index) => lengthArr.current.indexOf(item) === index
+        );
+        setTotalLength(list);
     }, [allData]);
 
     const settings = {
@@ -119,26 +143,29 @@ const CatSlider = (props) => {
     };
 
     return (
-        <div className="catSliderSection">
-            <div className="container-fluid">
-                <h2 className="hd">Featured Categories</h2>
-                <Slider {...settings} className="cat_slider_main" id="cat_slider_Main">
-                    {allData.map((item, index) => (
-                        <div className="item" key={index}>
-                            <Link to={`/cat/${item.cat_name.toLowerCase()}`}>
-                                <div className="info" style={{ background: categoryColors[index] }}>
-                                    <img src={item.image} alt={`Category ${item.cat_name}`} width={80} />
-                                    <h5 className="text-capitalize mt-3">{item.cat_name}</h5>
-                                    <p>{totalLength[index]} items</p>
-                                </div>
-                            </Link>
-                        </div>
-                    ))}
-                </Slider>
+        <>
+            <div className="catSliderSection">
+                <div className="container-fluid">
+                    <h2 className="hd">Featured Categories</h2>
+                    <Slider {...settings} className="cat_slider_main" id="cat_slider_Main">
+                        {allData.map((item, index) => (
+                            <div className="item" key={index}>
+                                <Link to={`/cat/${item.cat_name.toLowerCase()}`}>
+                                    <div className="info" style={{ background: category[index] }}>
+                                        <img src={item.image} alt="" width={80} />
+                                        <h5 className="text-capitalize mt-3">{item.cat_name}</h5>
+                                        <p>{totalLength[index]} items</p>
+                                    </div>
+                                </Link>
+                            </div>
+                        ))}
+                    </Slider>
+                </div>
             </div>
-        </div>
+        </>
     );
 };
 
 export default CatSlider;
+
 

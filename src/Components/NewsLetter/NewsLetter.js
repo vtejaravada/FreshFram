@@ -14,4 +14,4 @@ const NewsLetter = () => {
   )
 }
 
-export default NewsLetter
+export default NewsLetter 

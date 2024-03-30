@@ -26,9 +26,8 @@ const Cart = () => {
         }else{
             history('/');
         }
-            
-            
-    }, [])
+    }, [context.isLogin, history])
+    
 
     const getCartData = async (url) => {
         try {
@@ -49,30 +48,6 @@ const Cart = () => {
             context.removeItemsFromCart(id);
         }
     }
-
-    // const emptyCart = () => {
-    //     let response = null;
-    //     cartItems.length !== 0 &&
-    //         cartItems.map((item) => {
-    //             response = axios.delete(`http://localhost:3000/cartItems/${parseInt(item.id)}`);
-    //         })
-    //         if(response !== null){
-    //             getCartData("http://localhost:3000/cartItems");
-    //         }
-            
-    //         context.emptyCart();
-    // }
-
-    // const deleteItem = async (id) => {
-    //     try {
-    //         const response = await axios.delete(`http://localhost:3000/cartItems/${id}`);
-    //         if (response !== null) {
-    //             getCartData("http://localhost:3000/cartItems");
-    //         }
-    //     } catch (error) {
-    //         console.error('Error deleting item:', error.message);
-    //     }
-    // }
 
     const emptyCart = async () => {
         try {
@@ -144,7 +119,7 @@ const Cart = () => {
                                                             <div className="d-flex align-items-center">
                                                                     <div className='img'>
                                                                         <Link to={`/product/${item.id}`}>
-                                                                            <img src={item.catImg + '?im=Resize=(100,100)'} className='w-100'  alt='productNew'/>
+                                                                            <img src={item.catImg + '?im=Resize=(100,100)'} className='w-100' alt='CartProduct' />
                                                                         </Link>
                                                                     </div>
 

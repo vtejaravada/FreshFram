@@ -10,7 +10,7 @@ import Google from '../../assets/images/google.png';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
 
-import { initializeApp } from "firebase/app";
+// import { initializeApp } from "firebase/app";
 import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { app } from '../../firebase';
 import { useNavigate } from 'react-router-dom';
@@ -23,9 +23,7 @@ const googleProvider = new GoogleAuthProvider();
 const SignIn = () => {
 
   const [showPassword, setShowPassword] = useState(false)
-
   const [showLoader, setShowLoader] = useState(false)
-
   const [formFields, setFormFields] = useState({
     email: '',
     password: '',
@@ -51,7 +49,7 @@ const SignIn = () => {
     signInWithEmailAndPassword(auth, formFields.email, formFields.password)
       .then((userCredential) => {
         // Signed in 
-        const user = userCredential.user;
+        // const user = userCredential.user;
         setShowLoader(false);
         setFormFields({
           email: '',
@@ -64,8 +62,8 @@ const SignIn = () => {
         // ...
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
+        console.error("Error signing in:", error);
+        setShowLoader(false);
       });
   }
 
@@ -75,10 +73,10 @@ const SignIn = () => {
     signInWithPopup(auth, googleProvider)
       .then((result) => {
         
-        const credential = GoogleAuthProvider.credentialFromResult(result);
-        const token = credential.accessToken;
+        // const credential = GoogleAuthProvider.credentialFromResult(result);
+        // const token = credential.accessToken;
         // The signed-in user info.
-        const user = result.user;
+        // const user = result.user;
         
         setShowLoader(false);
         setFormFields({
@@ -91,12 +89,15 @@ const SignIn = () => {
 
       }).catch((error) => {
         // Handle Errors here.
-        const errorCode = error.code;
-        const errorMessage = error.message;
+          // const errorCode = error.code;
+          // const errorMessage = error.message;
         // The email of the user's account used.
-        const email = error.customData.email;
+          // const email = error.customData.email;
         // The AuthCredential type that was used.
-        const credential = GoogleAuthProvider.credentialFromError(error);
+          // const credential = GoogleAuthProvider.credentialFromError(error);
+
+        console.error("Error signing in with Google:", error);
+        setShowLoader(false);
         // ...
       });
   }
@@ -149,7 +150,7 @@ const SignIn = () => {
 
               <div className="form-group mt-5 mb-4 w-100 signInOr">
                 <p className='text-center'>OR</p>
-                <Button className='w-100' variant="outlined" onClick={signInWithGoogle}><img src={Google} />Sign In with Google</Button>
+                <Button className='w-100' variant="outlined" onClick={signInWithGoogle}><img src={Google} alt='Google_icon' />Sign In with Google</Button>
               </div>
 
               <p className='text-center'>Not have an account
