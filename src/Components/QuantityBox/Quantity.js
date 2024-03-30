@@ -12,7 +12,7 @@ const Quantity = (props) => {
     useEffect(() => {
         setcartItems(props.cartItems);
         //setinputValue(props.item.quantity)
-    }, [props.cartItems])
+    }, [cartItems, props.cartItems])
 
     const updateCart=(items)=>{
         props.updateCart(items)

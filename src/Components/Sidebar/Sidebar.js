@@ -7,12 +7,9 @@ import Banner from '../../assets/images/slider1.jpg';
 import proIcon1 from '../../assets/images/Icon/proIcon1.png';
 import FilterIcon from '../../assets/images/FilterIcon.png';
 
-// import Checkbox from '@mui/material/Checkbox';
 
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
-// import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
 import Radio from '@mui/material/Radio';
 
 import RangeSlider from 'react-range-slider-input';
@@ -21,11 +18,11 @@ import { Button } from '@mui/material';
 
 
 
-function valuetext(value) {
-    return `${value}°C`;
-  }
+// function valuetext(value) {
+//     return `${value}°C`;
+//   }
 
-  const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+//   const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
     const Sidebar = (props)=> {
 
@@ -37,25 +34,16 @@ function valuetext(value) {
 
         let { id } = useParams();
 
-        //  const [img]= useState([
-        //     proIcon1,
-        //     proIcon2,
-        //     proIcon3,
-        //     proIcon4,
-        //     proIcon5,
-        // ])
-
-        var brands = [];
-        var ratings = [];
-
-        var catLength=0;
+        
+        
         var lengthArr=[];
 
         useEffect(() => {
-            brands = [];
-            ratings=[];
+            let brands = [];
+            let ratings = [];
+
             props.currentCatData.length !== 0 &&
-                props.currentCatData.map((item) => {
+                props.currentCatData.forEach((item) => {
                     brands.push(item.brand);
                     ratings.push(parseFloat(item.rating))
                 })
@@ -65,16 +53,21 @@ function valuetext(value) {
     
             const ratings_ = ratings.filter((item, index) => ratings.indexOf(item) === index);
             setRatings(ratings_)
+
+            return()=>{
+
+            };
     
-        }, [id])
+        }, [id, props.currentCatData])
 
 //------------------------------------------------------------------------------------------
 
         useEffect(()=>{
+            let catLength=0;
             props.data.length !== 0 &&
-            props.data.map((item, index)=>{
+            props.data.forEach((item, index)=>{
                 item.items.length!==0 &&
-                item.items.map((item_)=>{
+                item.items.forEach((item_)=>{
                     catLength+=item_.products.length
                 })
                 lengthArr.push(catLength)
@@ -84,21 +77,21 @@ function valuetext(value) {
             const list = lengthArr.filter((item, index)=> lengthArr.indexOf(item) === index);
             setTotalLength(list)
             
-        }, []);
+        }, [props.data]);
 
 //===============================----------------
 
         useEffect(() => {
             var price = 0;
             props.currentCatData.length !==0 &&
-            props.currentCatData.map((item, index)=>{
+            props.currentCatData.forEach((item, index)=>{
                 let prodPrice = parseInt(item.price.toString().replace(/,/g, ""));
                 if(prodPrice > price) {
                     price = prodPrice
                 }
             })
             setValue2(price)
-        }, [props.currentCatData]);
+        }, [value2, props.currentCatData]);
 
 //===============================--------------------
 

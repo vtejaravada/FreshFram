@@ -102,12 +102,10 @@ const Footer = () => {
             </div>
 
             <div className="  partFoot">
-              <div className='partFootHe' style={{ lineHeight: 0.5, paddingLeft: 33 }}>
-                <p>Company</p>
-                <p><strong>About Us</strong></p>
-              </div>
+              <h3 className='partFootHe'>Company</h3>
 
               <ul className="footer-list mb-sm-5 mb-md-0">
+                <li><Link to="/about">About Us</Link></li>
                 <li><Link to="/about">Delivery Information</Link></li>
                 <li><Link to="/about">Privacy Policy</Link></li>
                 <li><Link to="/about">Terms &amp; Conditions</Link></li>
