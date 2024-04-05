@@ -105,9 +105,9 @@ const SignIn = () => {
   return (
     <section className="SignIn">
 
-      <div class="breadcrumbWrapper mb-4">
-        <div class="container-fluid">
-          <ul class="breadcrumb breadcrumb2 mb-0">
+      <div className="breadcrumbWrapper mb-4">
+        <div className="container-fluid">
+          <ul className="breadcrumb breadcrumb2 mb-0">
             <li><Link to="/">Home</Link></li>
             <li>Sign In</li>
           </ul>

@@ -1,11 +1,13 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useContext } from 'react';
 import Slider from 'react-slick';
 import '../catSlider/CatSlider.css';
 import { Link } from 'react-router-dom';
+import { MyContext } from '../../App';
 
 const CatSlider = (props) => {
     const [allData] = useState(props.data);
     const [totalLength, setTotalLength] = useState([]);
+    const context = useContext(MyContext);
 
     const [category] = useState([
         '#fffceb',
@@ -54,9 +56,9 @@ const CatSlider = (props) => {
         slidesToShow: 10,
         slidesToScroll: 1,
         fade: false,
-        arrows: true,
-        autoplay: 2000,
-        centerMode: true,
+        arrows: context.windowWidth > 768 ? true : false,
+        autoplay: context.windowWidth > 768 ? 2000 : false,
+        centerMode: context.windowWidth > 768 ? true : false,
         responsive: [
             {
                 breakpoint: 1800,
@@ -148,17 +150,19 @@ const CatSlider = (props) => {
                 <div className="container-fluid">
                     <h2 className="hd">Featured Categories</h2>
                     <Slider {...settings} className="cat_slider_main" id="cat_slider_Main">
-                        {allData.map((item, index) => (
-                            <div className="item" key={index}>
-                                <Link to={`/cat/${item.cat_name.toLowerCase()}`}>
-                                    <div className="info" style={{ background: category[index] }}>
-                                        <img src={item.image} alt="" width={80} />
-                                        <h5 className="text-capitalize mt-3">{item.cat_name}</h5>
-                                        <p>{totalLength[index]} items</p>
-                                    </div>
-                                </Link>
-                            </div>
-                        ))}
+                        {
+                            allData.map((item, index) => (
+                                <div className="item" key={index}>
+                                    <Link to={`/cat/${item.cat_name.toLowerCase()}`}>
+                                        <div className="info" style={{ background: category[index] }}>
+                                            <img src={item.image} alt="itemImage" width={80} />
+                                            <h5 className="text-capitalize mt-3">{item.cat_name}</h5>
+                                            <p>{totalLength[index]} items</p>
+                                        </div>
+                                    </Link>
+                                </div>
+                            ))
+                        }
                     </Slider>
                 </div>
             </div>

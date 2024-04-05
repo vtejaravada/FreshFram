@@ -16,7 +16,6 @@ const Banner_Bot = () => {
                 </div>
             </div>
         </section>
-        
     </>
   )
 }

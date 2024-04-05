@@ -194,7 +194,7 @@ header .countryWrapper .openSelect {
     background: #fff;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.1);
     padding: 10px 0px;
-    z-index: 100;
+    z-index: 1000;
     right: 45px;
     top: 100px;
     border-radius: 15px;
@@ -227,6 +227,11 @@ header .countryWrapper .openSelect {
 .dropdownMenu li button svg {
     opacity: 0.7;
     margin-right: 8px !important;
+}
+
+.nav-mobile
+{
+    display: none;
 }
 
 @media(max-width:1750px)
@@ -308,11 +313,11 @@ header .countryWrapper .openSelect {
     }
     
     .partHead2{
-        width: 40%;
+        width: 46%;
     }
     
     .partHead3{
-        width: 46%;
+        width: 40%;
     }
     header .headerSearch .search 
     {
@@ -329,11 +334,6 @@ header .countryWrapper .openSelect {
 @media(max-width:1024px)
 {
     .iconCom .lable{
-        display: none;
-    }
-
-    .info1
-    {
         display: none;
     }
 }

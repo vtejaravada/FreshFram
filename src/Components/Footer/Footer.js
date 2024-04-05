@@ -119,8 +119,8 @@ const Footer = () => {
               <h3 className='partFootHe'>Account</h3>
 
               <ul className="footer-list mb-sm-5 mb-md-0">
-                <li><Link to="/about">Sign In</Link></li>
-                <li><Link to="/about">View Cart</Link></li>
+                <li><Link to="/signIn">Sign In</Link></li>
+                <li><Link to="/cart">View Cart</Link></li>
                 <li><Link to="/about">My Wishlist</Link></li>
                 <li><Link to="/about">Track My Order</Link></li>
                 <li><Link to="/about">Help Ticket</Link></li>

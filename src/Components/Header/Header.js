@@ -10,6 +10,11 @@ import IconCompare from '../../assets/images/icon-compare.svg';
 import IconHeart from '../../assets/images/icon-heart.svg';
 import IconCart from '../../assets/images/icon-cart.svg';
 import IconUser from '../../assets/images/icon-user.svg';
+import MenuIcon from '@mui/icons-material/Menu';
+import SearchIcon from '@mui/icons-material/Search';
+// import FmdGoodOutlinedIcon from '@mui/icons-material/FmdGoodOutlined';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 
 import Button from '@mui/material/Button';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
@@ -26,10 +31,20 @@ import { MyContext } from '../../App';
 const Header = (props) => {
 
     const [isOpenDropDown, setisOpenDropDown] = useState(false);
+    const [isOpenAccDropDown, setIsOpenAccDropDown] = useState(false);
+
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+    const [isopenSearch, setOpenSearch] = useState(false);
+    const [isOpenNav, setIsOpenNav] = useState(false);
+
     const headerRef = useRef();
+    const searchInput = useRef()
 
     const context = useContext(MyContext);
     const history = useNavigate();
+
+    useEffect(() => {
+    }, [context.cartItems])
 
     const [Categories] = useState([
         // 'All Categories',
@@ -46,49 +61,30 @@ const Header = (props) => {
     ]);
 
     //Location -----------------
-    // const [countryList] = useState([]);
+    
 
-    // useEffect(() => {
-    //     const getCountry = async (url) => {
-    //         try {
-    //             await axios.get(url).then((response) => {
-    //                 if (response !== null) {
-    //                     // console.log(res.data.data);
-    //                     response.data.data.map((item, index) => {
-    //                         countryList.push(item.country);
-    //                     })
-
-    //                     // console.log(res.data.data.country)
-    //                 }
-    //             })
-    //         } catch (error) {
-    //             console.log(error.message);
-    //         }
-    //     };
-
-    //     getCountry('https://countriesnow.space/api/v0.1/countries/');
-    // }, [countryList]);
-
-    const [countryList, setCountryList] = useState([]);
+    const [countryList] = useState([]);
 
     useEffect(() => {
         const getCountry = async (url) => {
             try {
-                const response = await axios.get(url);
-                if (response !== null) {
-                    const countries = response.data.data.map((item) => item.country);
-                    console.log("Fetched country data:", countries); // Log the fetched country data
-                    setCountryList(countries);
-                }
+                await axios.get(url).then((response) => {
+                    if (response !== null) {
+                        // console.log(res.data.data);
+                        response.data.data.map((item, index) => {
+                            countryList.push(item.country);
+                        })
+    
+                        // console.log(res.data.data.country)
+                    }
+                })
             } catch (error) {
                 console.log(error.message);
             }
         };
-
+    
         getCountry('https://countriesnow.space/api/v0.1/countries/');
-    }, []);
-
-    console.log("Country list state:", countryList); // Log the current state of countryList for debugging
+    }, [countryList]);
 
     //Scroll By top-----------------------
 
@@ -108,6 +104,27 @@ const Header = (props) => {
         history('/');
     }
 
+    const openSearch = () => {
+        setOpenSearch(true);
+        searchInput.current.focus();
+    }
+
+    const closeSearch = () => {
+        setOpenSearch(false);
+        searchInput.current.blur();
+        searchInput.current.value = '';
+    }
+
+    const openNav = () => {
+        setIsOpenNav(true);
+        context.setIsOpenNavigation(true)
+    }
+
+    const closeNav = () => {
+        setIsOpenNav(false);
+        setIsOpenAccDropDown(false)
+        context.setIsOpenNavigation(false)
+    }
 
     return (
         <>
@@ -117,40 +134,74 @@ const Header = (props) => {
                     <div className="container-fluid">
                         <div className="row HeaderRow">
 
-                            <div className="logo partHead1 d-flex align-items-center">
+                            <div className="logo partHead1 partH1 d-flex align-items-center">
                                 <Link to="/"><img src={logo} alt="logo" /></Link>
+                                {
+                                    context.windowWidth < 768 &&
+                                    <div className="ms-auto d-flex align-items-center">
+
+                                        <div className="navbarToggle me-2" onClick={openSearch}><SearchIcon /></div>
+
+                                        <ul className='list list-inline mb-0 headerTabs ps-0 me-4'>
+                                            <li className='list-inline-item icon'>
+                                                <Link to={'/cart'}>
+                                                    <img src={IconCart} alt="IconCart" />
+                                                    <span className='pro-count blue'>{context.cartItems.length}</span>
+                                                </Link>
+                                            </li>
+                                        </ul>
+
+                                        <div className="navbarToggle me-3" onClick={openNav}><MenuIcon /></div>
+
+                                        {
+                                            context.isLogin === 'true' &&
+                                            <div className="myAccDrop me-3 " onClick={() => setIsOpenAccDropDown(!isOpenAccDropDown)}><PersonOutlineOutlinedIcon /></div>
+                                        }
+
+                                    </div>
+                                }
                             </div>
 
                             {/* headerSearch  start here */}
-                            <div className="partHead2">
-                                <div className="headerSearch d-flex align-items-center">
+                            <div className="partHead2 partH2 ">
+                                <div className={` headerSearch d-flex align-items-center ${isopenSearch === true ? 'open' : ''}`}>
+
+                                    {
+                                        windowWidth < 768 &&
+                                        <div className='countryWrapper mb-0 w-100'>
+                                            <Select
+                                                data={countryList}
+                                                placeholder={'Your Location'}
+                                                icon={<LocationOnOutlinedIcon style={{ opacity: '0.5' }} />}
+                                            />
+                                        </div>
+                                    }
+
+                                    {
+                                        windowWidth < 768 && <div class='closeSearch' onClick={closeSearch}> <ArrowBackIosIcon /></div>
+                                    }
                                     <Select data={Categories} placeholder={'All categories'} icon={false} />
 
                                     <div className="search">
-                                        <input type="text" placeholder='Search for items ...' />
+                                        <input type="text" placeholder='Search for items ...' ref={searchInput} />
                                         <CiSearch className='searchIcon cursor' />
                                     </div>
                                 </div>
                             </div>
 
                             <ClickAwayListener onClickAway={() => setisOpenDropDown(false)}>
-                                <div className='partHead3 '>
+                                <div className='partHead3 partH3 res-hide '>
                                     <div className='headerList'>
 
                                         <ul className='list list-inline mb-0 headerTabs'>
 
                                             <li className='countryWrapper'>
                                                 <Select
-                                                    data={countryList.map((country, index) => (
-                                                        <option key={country} value={country}>
-                                                            {country}
-                                                        </option>
-                                                    ))}
+                                                    data={countryList}
                                                     placeholder={'Your Location'}
                                                     icon={<LocationOnOutlinedIcon style={{ opacity: '0.5' }} />}
                                                 />
                                             </li>
-
 
                                             <li className='list-inline-item icon'>
 
@@ -165,7 +216,7 @@ const Header = (props) => {
                                             </li>
                                             <li className='list-inline-item icon'>
                                                 <Link to={'/'}>
-                                                    <img src={IconHeart} alt="IconCart" />
+                                                    <img src={IconHeart} alt="IconHeart" />
                                                     <span className='pro-count blue'>3</span>
                                                 </Link>
                                                 <Link to={'/'} className='iconCom'>
@@ -188,12 +239,12 @@ const Header = (props) => {
                                                     <li className='list-inline-item '>
 
                                                         <span onClick={() => setisOpenDropDown(!isOpenDropDown)} className='icon'>
-                                                            <Link >
+                                                            <Link to="#">
                                                                 <img src={IconUser} alt="IconUser" />
                                                                 {/* <span className='pro-count blue'></span> */}
                                                             </Link>
 
-                                                            <Link className='iconCom'>
+                                                            <Link to="#" className='iconCom'>
                                                                 <span className='lable ms-1'>Account</span>
                                                             </Link>
                                                         </span>
@@ -217,10 +268,7 @@ const Header = (props) => {
                                                             <Button className="btn btn-g">Sign In</Button>
                                                         </Link>
                                                     </li>
-
                                             }
-
-                                            {/* <div className="navbarToggle ms-auto"><MenuIcon /></div> */}
 
                                         </ul>
 
@@ -229,21 +277,33 @@ const Header = (props) => {
                                 </div>
                             </ClickAwayListener>
 
-
-
                         </div>
                     </div>
                 </header>
 
-
-
-                <Navba data={props.data} />
+                <Navba data={props.data} openNav={isOpenNav} closeNav={closeNav} />
 
             </div>
 
             <div className="afterHeader">
 
             </div>
+
+            {
+                isOpenAccDropDown !== false &&
+                <>
+                    <div className="navbarOverlay" onClick={closeNav}></div>
+                    <ul className='dropdownMenu dropdownMenuAcc' onClick={closeNav}>
+                        <li><Button className='align-items-center'><Link to=""><Person2OutlinedIcon /> My Account</Link></Button></li>
+                        <li><Button className='align-items-center'><Link to=""><img src={IconCompare} alt="IconCompare" /> Compare</Link></Button></li>
+                        <li><Button className='align-items-center'><Link to=""><img src={IconCart} alt="IconCart" /> Cart</Link></Button></li>
+                        <li><Button><Link to=""><LocationOnOutlinedIcon /> Order Tracking</Link></Button></li>
+                        <li><Button><Link to=""><FavoriteBorderOutlinedIcon /> My Wishlist</Link></Button></li>
+                        <li><Button><Link to=""><SettingsOutlinedIcon /> Setting</Link></Button></li>
+                        <li><Button onClick={signOut}><Link to=""><LogoutOutlinedIcon /> Sign out</Link></Button></li>
+                    </ul>
+                </>
+            }
         </>
     )
 }

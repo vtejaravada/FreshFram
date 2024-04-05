@@ -161,7 +161,7 @@ const Cart = () => {
                         </div>
                         <br />
 
-                            <div className='d-flex align-items-center'>
+                            <div className='d-flex align-items-center  mb-5'>
                                 <Link to="/">
                                     <Button className='btn-g'>
                                         <MdKeyboardBackspace /> Continue Shopping

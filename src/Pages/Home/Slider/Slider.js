@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from 'react-slick';
@@ -12,8 +12,13 @@ import slider4 from '../../../assets/images/slider4.jpg';
 import slider5 from '../../../assets/images/slider5.jpg';
 import NewsLetter from '../../../Components/NewsLetter/NewsLetter';
 
+import { MyContext } from '../../../App';
+
 const HomeSlider = () => {
     const images = [slider1, slider2, slider3, slider4, slider5];
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+    const context = useContext(MyContext);
 
     const settings = {
         dots: true,
@@ -22,9 +27,13 @@ const HomeSlider = () => {
         slidesToShow: 1,
         slidesToScroll: 1,
         fade: true,
-        arrows: true,
-        autoplay:2000
+        arrows: context.windowWidth>768 ? true : false,
+        autoplay: 2000
     };
+
+    useEffect(() => {
+
+    }, [])
 
     return (
         <section className="homeSlider">
@@ -40,7 +49,9 @@ const HomeSlider = () => {
                                                 <h2 className='mb-4'>Don't miss amazing<br /> grocery deals</h2>
                                                 <p>Sign up for the daily newsletter</p>
 
-                                                    <NewsLetter/>
+                                                {
+                                                    context.windowWidth > 768 && <NewsLetter />
+                                                }
 
                                             </div>
                                         </>
@@ -51,8 +62,10 @@ const HomeSlider = () => {
                                                 <h2 className='mb-3'>Fresh vegetables <br />big discount</h2>
                                                 <p>save upto 50%off on your first order</p>
 
-                                                    <NewsLetter/>
-                                                
+                                                {
+                                                    context.windowWidth > 768 && <NewsLetter />
+                                                }
+
                                             </div>
                                         </>
                                     )}

@@ -23,12 +23,12 @@ const Product = (props) => {
         setProductData(props.item);
     }, [props.item])
 
-    const setProductCat=()=>{
+    const setProductCat = () => {
         sessionStorage.setItem('parentCat', productData.parentCatName);
         sessionStorage.setItem('subCatName', productData.subCatName);
     }
 
-    const addToCart=(item)=>{
+    const addToCart = (item) => {
         context.addToCart(item);
         setIsadded(true);
     }
@@ -37,7 +37,7 @@ const Product = (props) => {
         <>
             <div className="productThumb" onClick={setProductCat}>
                 {
-                    props.tag!== null && props.tag!== undefined && (
+                    props.tag !== null && props.tag !== undefined && (
                         <span className={`badge ${props.tag}`}>{props.tag}</span>
                     )
                 }
@@ -48,24 +48,24 @@ const Product = (props) => {
                         <Link to={`/product/${productData.id}`}> {/* Placeholder 'to' prop */}
                             <div className="imgWrapper ">
                                 <div className="p-4 wrapper">
-                                    <img src={productData.catImg+'?im=Resize=(420,420)'} alt="" className="w-100" />
+                                    <img src={productData.catImg + '?im=Resize=(420,420)'} alt="productImg" className="w-100" />
                                 </div>
                                 <div className="overlay">
                                     <ul className="list list-inline mb-0">
                                         <li className="list-inline-item mb-0">
-                                            <a href="/about" className="cursor" tooltip="Add to Whishlist">
-                                                    <FaRegHeart />
-                                            </a>
+                                            <Link to="#" className="cursor" tooltip="Add to Whishlist">
+                                                <FaRegHeart />
+                                            </Link>
                                         </li>
                                         <li className="list-inline-item mb-0">
-                                            <a href="/about" className="cursor" tooltip="Compare">
+                                            <Link to="#" className="cursor" tooltip="Compare">
                                                 <MdCompareArrows />
-                                            </a>
+                                            </Link>
                                         </li>
                                         <li className="list-inline-item mb-0">
-                                            <a href="/about" className="cursor" tooltip="View">
+                                            <Link to="#" className="cursor" tooltip="View">
                                                 <MdOutlineRemoveRedEye />
-                                            </a>
+                                            </Link>
                                         </li>
                                     </ul>
                                 </div>
@@ -76,7 +76,7 @@ const Product = (props) => {
                             <span className="d-block catName">{productData.brand}</span>
                             <h4 className="title">
                                 <Link to="/product-details">
-                                   {productData.productName.substr(0,30)+'...'}
+                                    {productData.productName.substr(0, 30) + '...'}
                                 </Link>
                             </h4>
                             <Rating name="half-rating-read" value={parseFloat(productData.rating)} precision={0.5} readOnly />
@@ -89,23 +89,19 @@ const Product = (props) => {
                                     <div className="price text-g font-weight-bold">Rs {productData.price}</div>
                                     <div className="oldPrice ms-auto">Rs {productData.oldPrice}</div>
                                 </div>
-                                
+
                             </div>
 
-                                <Button className="ms-auto transition w-100 mt-3" onClick={()=>addToCart(productData)}>
-                                    <MdOutlineShoppingCart />
-                                    {
-                                        isAdded===true ? 'Added' : 'Add'
-                                    }
-                                </Button>
-
+                            <Button className="ms-auto transition w-100 mt-3" onClick={() => addToCart(productData)}>
+                                <MdOutlineShoppingCart />
+                                {
+                                    isAdded === true ? 'Added' : 'Add'
+                                }
+                            </Button>
                         </div>
                     </>
                 }
 
-                    
-
-                
             </div>
         </>
     );

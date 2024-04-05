@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import '../Listing/Listing.css'
 import Sidebar from '../../Components/Sidebar/Sidebar'
@@ -7,54 +7,21 @@ import { IoGridOutline } from "react-icons/io5";
 import { IoFilter } from "react-icons/io5";
 import { Button } from '@mui/material';
 
+import { MyContext } from '../../App';
+
 const Listing = (props) => {
     const [isOpenDropDown, setisOpenDropDown] = useState(false);
     const [isOpenDropDown2, setisOpenDropDown2] = useState(false);
     const [data, setData] = useState([]);
-
     const { id } = useParams();
+
+    const context = useContext(MyContext);
 
     var itemsData = [];
 
-    // useEffect(() => {
-    //     props.data.length !== 0 &&
-    //         props.data.map((item) => {
-    //             //page == single cat
-    //             if (props.single === true) {
-    //                 if (item.cat_name.toLowerCase() === id.toLowerCase()) {
-    //                     item.items.length !== 0 &&
-    //                         item.items.map((item_) => {
-
-    //                             return(
-    //                                 item_.products.length !== 0 &&
-    //                                 item_.products.map((product) => {
-    //                                     itemsData.push(product);
-    //                                 })
-    //                             )
-    //                         })
-    //                 }
-    //             }
-    //             //page == double cat
-    //             else {
-    //                 item.items.length !== 0 &&
-    //                     item.items.map((item_, index_) => {
-                            
-    //                         if (item_.cat_name.split(' ').join('-').toLowerCase() === id.toLocaleLowerCase())
-    //                             item_.products.length !== 0 &&
-    //                                 item_.products.map((product) => {
-    //                                     itemsData.push(product);
-    //                                 })
-    //                     })
-    //             }
-    //         })
-    //     const list2 = itemsData.filter((item, index) => itemsData.indexOf(item) === index);
-    //     setData(list2);
-    // }, [id])
-
-
     useEffect(() => {
         let itemsData = [];
-    
+
         if (props.data.length !== 0) {
             props.data.forEach((item) => {
                 // page == single cat
@@ -87,18 +54,18 @@ const Listing = (props) => {
                 }
             });
         }
-    
+
         const list2 = itemsData.filter((item, index) => itemsData.indexOf(item) === index);
         setData(list2);
-    
+
         // Return cleanup function if necessary
         return () => {
             // Any cleanup code can go here
         };
     }, [id, props.data, props.single]);
-    
-    
-//-------------------------------------------------------------------------------------------
+
+
+    //-------------------------------------------------------------------------------------------
 
     const filterByBrand = (keyword) => {
 
@@ -145,16 +112,15 @@ const Listing = (props) => {
         const list2 = itemsData.filter((item, index) => itemsData.indexOf(item) === index);
         //console.log(itemsData)
 
-
         setData(list2);
-        
-        window.scrollTo(0,0);
 
-        return () => {
-            // Any cleanup code can go here
-        };
+        // return () => {
+        //     // Any cleanup code can go here
+        // };
+
+        // window.scrollTo(0,0);
     }
-//-------------------------------------------------------------------------------------------
+    //-------------------------------------------------------------------------------------------
     const filterByPrice = (minValue, maxValue) => {
 
         props.data.length !== 0 &&
@@ -195,13 +161,14 @@ const Listing = (props) => {
 
         const list2 = itemsData.filter((item, index) => itemsData.indexOf(item) === index);
         setData(list2);
-        window.scrollTo(0,0)
 
-        return()=>{
+        // window.scrollTo(0,0);
 
-        };
+        // return()=>{
+
+        // };
     }
-//-------------------------------------------------------------------------------------------
+    //-------------------------------------------------------------------------------------------
     const filterByRating = (keyword) => {
 
         props.data.length !== 0 &&
@@ -210,15 +177,15 @@ const Listing = (props) => {
                 //page == single cat
                 if (props.single === true) {
 
-                    item.items.length!== 0 &&
-                    item.items.forEach((item_)=>{
-                        item_.products.forEach((item__)=>{
-                            let rating = parseFloat(item__.rating);
-                            if(rating === keyword){
-                                itemsData.push({...item__, parentCatName:item.cat_name, subCatName:item_.cat_name})
-                            }
+                    item.items.length !== 0 &&
+                        item.items.forEach((item_) => {
+                            item_.products.forEach((item__) => {
+                                let rating = parseFloat(item__.rating);
+                                if (rating === keyword) {
+                                    itemsData.push({ ...item__, parentCatName: item.cat_name, subCatName: item_.cat_name })
+                                }
+                            })
                         })
-                    })
                 }
                 //page == double cat
                 else {
@@ -228,7 +195,7 @@ const Listing = (props) => {
                             if (item_.cat_name.split(' ').join('-').toLowerCase() === id.split(' ').join('-').toLowerCase()) {
                                 item_.products.forEach((item__, index__) => {
                                     let rating = parseFloat(item__.rating);
-                                    if(rating === keyword){
+                                    if (rating === keyword) {
                                         itemsData.push({ ...item__, parentCatName: item.cat_name, subCatName: item_.cat_name })
                                     }
                                 })
@@ -244,16 +211,27 @@ const Listing = (props) => {
 
         setData(list2);
 
-        window.scrollTo(0,0)
+        // window.scrollTo(0,0)
 
-        return()=>{
+        // return()=>{
 
-        };
+        // };
 
     }
 
     return (
         <>
+
+            {
+                context.windowWidth < 768 &&
+                <>
+                    {
+                        context.isOpenNavigation === false &&
+                        <div className='filterMoblie'><Button className='btn-g btn-lg w-100 filterBtn' onClick={() => context.openFilters()}>Filters</Button></div>
+                    }
+                </>
+            }
+
             <section className="listingPaga">
                 <div className="container-fluid">
 
@@ -284,14 +262,15 @@ const Listing = (props) => {
 
                     <div className="listingData">
                         <div className="row">
-                            <div className="col-md-3 sidebarWrapper">
+                            <div className={`col-md-3 sidebarWrapper ${context.isOpenFilters === true && 'click'} `}>
+
 
                                 {
                                     data.length !== 0 && <Sidebar data={props.data} currentCatData={data} filterByBrand={filterByBrand} filterByPrice={filterByPrice} filterByRating={filterByRating} />
                                 }
 
                             </div>
-                            
+
                             <div className="col-md-9 rightContent homeProducts pt-0">
 
                                 <div className="topStrip d-flex align-items-center">
@@ -327,7 +306,7 @@ const Listing = (props) => {
                                     </div>
                                 </div>
 
-                                <div className="productRow ps-4 pe-3">
+                                <div className="productRow  productRow1 ps-4 pe-3">
 
                                     {
                                         data.length !== 0 &&

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, useCallback  } from 'react';
+import React, { useEffect, useRef, useState, useCallback, useContext } from 'react';
 import Slider from 'react-slick';
 import '../../Pages/Details/Details.css';
 import Table from 'react-bootstrap/Table';
@@ -25,6 +25,7 @@ import { IoIosHeadset } from "react-icons/io";
 
 import Product from '../Home/Products/Product';
 import axios from 'axios';
+import { MyContext } from '../../App';
 
 import Quantity from '../../Components/QuantityBox/Quantity';
 
@@ -37,11 +38,16 @@ const Details = (props) => {
 
     const [activeSize, setActiveSize] = useState(0);
 
+
+
     // const [inputValue, setinputValue] = useState(1);
 
     const [activeTabs, setActiveTabs] = useState(0);
 
     const [currentProduct, setCurrentProduct] = useState({})
+    const [isAdded, setIsadded] = useState(false);
+
+    const context = useContext(MyContext);
 
     const [prodCat] = useState({
         parentCat: sessionStorage.getItem('parentCat'),
@@ -53,6 +59,8 @@ const Details = (props) => {
     const [rating, setRating] = useState(0.0);
 
     const [reviewsArr, setReviewsArr] = useState([]);
+
+    const [isAlreadyAddedInCart, setisAlreadyAddedInCart] = useState(false);
 
     const [reviewFields, setReviewFields] = useState({
         review: '',
@@ -69,7 +77,7 @@ const Details = (props) => {
 
     var settings2 = {
         dots: false,
-        infinite: false,
+        infinite: true,
         speed: 700,
         slidesToShow: 1,
         slidesToScroll: 1,
@@ -79,22 +87,22 @@ const Details = (props) => {
 
     var settings = {
         dots: false,
-        infinite: false,
-        speed: 500,
-        slidesToShow: 5,
-        slidesToScroll: 1,
-        fade: false,
-        arrows: true
-    };
-
-    var related = {
-        dots: false,
-        infinite: false,
+        infinite: true,
         speed: 500,
         slidesToShow: 4,
         slidesToScroll: 1,
         fade: false,
-        arrows: true
+        arrows: context.windowWidth > 768 ? true : false
+    };
+
+    var related = {
+        dots: false,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        fade: false,
+        arrows: context.windowWidth > 768 ? true : false
     };
     const goto = (index) => {
 
@@ -107,165 +115,172 @@ const Details = (props) => {
         setActiveSize(index);
     }
 
-    // useEffect(() => {
-    //     window.scrollTo(0, 0)
-
-    //     props.data.length !== 0 &&
-    //         props.data.forEach((item) => {
-    //             item.items.length !== 0 &&
-    //                 item.items.forEach((item_) => {
-    //                     item_.products.length !== 0 &&
-    //                         item_.products.forEach((product) => {
-    //                             if (parseInt(product.id) === parseInt(id)) {
-    //                                 setCurrentProduct(product);
-    //                             }
-    //                         })
-    //                 })
-    //         })
-
-    //     //related products code
-
-    //     const related_products = [];
-
-    //     props.data.length !== 0 &&
-    //         props.data.forEach((item) => {
-    //             if (prodCat.parentCat === item.cat_name) {
-    //                 item.items.length !== 0 &&
-    //                     item.items.forEach((item_) => {
-    //                         if (prodCat.subCatName === item_.cat_name) {
-    //                             item_.products.length !== 0 &&
-    //                                 item_.products.forEach((product, index) => {
-    //                                     if (product.id !== parseInt(id)) {
-    //                                         related_products.push(product)
-    //                                     }
-
-    //                                 })
-    //                         }
-    //                     })
-    //             }
-
-    //         })
-
-
-    //     if (related_products.length !== 0) {
-    //         setRelatedProducts(related_products)
-    //     }
-
-
-    //     showReviews();
-
-    //     return()=>{
-
-    //     };
-    // }, [id]);
-
-    const showReviews = useCallback(async () => {
-        try {
-            const response = await axios.get("http://localhost:3000/productReviews");
-            const filteredReviews = response.data.filter(item => parseInt(item.productId) === parseInt(id));
-            setReviewsArr(filteredReviews);
-        } catch (error) {
-            console.log(error.message);
-        }
-    }, [id]);
-    
     useEffect(() => {
-        window.scrollTo(0, 0);
-    
-        props.data.forEach((item) => {
-            item.items.forEach((item_) => {
-                item_.products.forEach((product) => {
-                    if (parseInt(product.id) === parseInt(id)) {
-                        setCurrentProduct(product);
-                    }
-                });
-            });
-        });
-    
+        window.scrollTo(0, 0)
+
+        props.data.length !== 0 &&
+            props.data.map((item) => {
+                item.items.length !== 0 &&
+                    item.items.map((item_) => {
+                        item_.products.length !== 0 &&
+                            item_.products.map((product) => {
+                                if (parseInt(product.id) === parseInt(id)) {
+                                    setCurrentProduct(product);
+                                }
+                            })
+                    })
+            })
+
+        //related products code
+
         const related_products = [];
-    
-        props.data.forEach((item) => {
-            if (prodCat.parentCat === item.cat_name) {
-                item.items.forEach((item_) => {
-                    if (prodCat.subCatName === item_.cat_name) {
-                        item_.products.forEach((product) => {
-                            if (product.id !== parseInt(id)) {
-                                related_products.push(product);
+
+        props.data.length !== 0 &&
+            props.data.map((item) => {
+                if (prodCat.parentCat === item.cat_name) {
+                    item.items.length !== 0 &&
+                        item.items.map((item_) => {
+                            if (prodCat.subCatName === item_.cat_name) {
+                                item_.products.length !== 0 &&
+                                    item_.products.map((product, index) => {
+                                        if (product.id !== parseInt(id)) {
+                                            related_products.push(product)
+                                        }
+
+                                    })
                             }
-                        });
-                    }
-                });
-            }
-        });
-    
+                        })
+                }
+
+            })
+
         if (related_products.length !== 0) {
-            setRelatedProducts(related_products);
+            setRelatedProducts(related_products)
         }
-    
+
         showReviews();
-    }, [id, prodCat.parentCat, prodCat.subCatName, props.data, showReviews]);
-    
+
+        getCartData("http://localhost:3000/cartItems");
+
+    }, [id]);
+
+
     const changeInput = (name, value) => {
         if (name === "rating") {
             setRating(value);
         }
-        setReviewFields((prevFields) => ({
-            ...prevFields,
+        setReviewFields(() => ({
+            ...reviewFields,
             [name]: value,
             productId: id,
             date: new Date().toLocaleString()
-        }));
-    };
-    
+        }))
+    }
+
+    const reviews_Arr = [];
+
     const submitReview = async (e) => {
         e.preventDefault();
-    
+
         try {
-            const response = await axios.post("http://localhost:3000/productReviews", reviewFields);
-            reviews_Arr.push(response.data);
-            setReviewFields(() => ({
-                review: '',
-                userName: '',
-                rating: 0.0,
-                productId: 0,
-                date: ''
-            }));
-            showReviews();
+
+            await axios.post("http://localhost:3000/productReviews", reviewFields).then((response) => {
+                reviews_Arr.push(response.data);
+                setReviewFields(() => ({
+                    review: '',
+                    userName: '',
+                    rating: 0.0,
+                    productId: 0,
+                    date: ''
+                }))
+            })
+
         } catch (error) {
             console.log(error.message);
         }
-    };
-    
-    var reviews_Arr = [];
+
+        showReviews();
+        
+    }
+
+    var reviews_Arr2 = [];
+    const showReviews = async () => {
+        try {
+            await axios.get("http://localhost:3000/productReviews").then((response) => {
+                if (response.data.length !== 0) {
+                    response.data.map((item) => {
+                        if (parseInt(item.productId) === parseInt(id)) {
+                            reviews_Arr2.push(item)
+                        }
+
+                    })
+
+                }
+            })
+        } catch (error) {
+            console.log(error.message);
+        }
+
+        if (reviews_Arr2.length !== 0) {
+
+            setReviewsArr(reviews_Arr2);
+        }
+
+    }
+
+    const addToCart = (item) => {
+        context.addToCart(item);
+        setIsadded(true);
+    }
+
+    const getCartData = async (url) => {
+        try {
+            await axios.get(url).then((response) => {
+                response.data.length!==0 && response.data.map((item)=>{
+                    
+                    if(parseInt(item.id)===parseInt(id)){
+                        setisAlreadyAddedInCart(true);
+                    }
+                })
+            })
+
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
 
     return (
         <>
+
             <section className="detailsPage md-5">
 
-                <div className='breadcrumbWrapper mb-4'>
-                    <div className='container-fluid'>
-                        <ul className="breadcrumb breadcrumb2 mb-0">
-                            <li><Link>Home</Link></li>
+                {
+                    context.windowWidth > 768 &&
+                    <div className='breadcrumbWrapper mb-4'>
+                        <div className='container-fluid'>
+                            <ul className="breadcrumb breadcrumb2 mb-0">
+                                <li><Link to="#" >Home</Link></li>
 
-                            <li>
-                                <Link to={`/cat/${prodCat.parentCat.split(' ').join('-').toLowerCase()}`}
-                                    onClick={() => sessionStorage.setItem('cat', prodCat.parentCat.split(' ').join('-').toLowerCase())} className='text-capitalize'>
-                                    {prodCat.parentCat}
-                                </Link>
-                            </li>
+                                <li>
+                                    <Link to={`/cat/${prodCat.parentCat.split(' ').join('-').toLowerCase()}`}
+                                        onClick={() => sessionStorage.setItem('cat', prodCat.parentCat.split(' ').join('-').toLowerCase())} className='text-capitalize'>
+                                        {prodCat.parentCat}
+                                    </Link>
+                                </li>
 
-                            <li>
-                                <Link to={`/cat/${prodCat.parentCat.toLowerCase()}/${prodCat.subCatName.replace(/\s/g, '-').toLowerCase()}`}
-                                    onClick={() => sessionStorage.setItem('cat', prodCat.subCatName.toLowerCase())} className='text-capitalize'>
-                                    {prodCat.subCatName}
-                                </Link>
-                            </li>
+                                <li>
+                                    <Link to={`/cat/${prodCat.parentCat.toLowerCase()}/${prodCat.subCatName.replace(/\s/g, '-').toLowerCase()}`}
+                                        onClick={() => sessionStorage.setItem('cat', prodCat.subCatName.toLowerCase())} className='text-capitalize'>
+                                        {prodCat.subCatName}
+                                    </Link>
+                                </li>
 
-                            <li>{currentProduct.productName}</li>
-                        </ul>
+                                <li>{currentProduct.productName}</li>
+                            </ul>
+                        </div>
+
                     </div>
-
-                </div>
+                }
 
                 <div className="container detailsContainer pt-3 pb-3">
 
@@ -299,7 +314,7 @@ const Details = (props) => {
                                     currentProduct.productImages !== undefined &&
                                     currentProduct.productImages.map((imgUrl, index) => {
                                         return (
-                                            <div className='item'>
+                                            <div className='item' key={index}>
                                                 <img src={`${imgUrl}?im=Resize=(${smlImageSize[0]},${smlImageSize[1]})`} className='w-100'
                                                     onClick={() => goto(index)} alt='productImg' />
                                             </div>
@@ -338,12 +353,12 @@ const Details = (props) => {
                                 currentProduct.weight !== undefined && currentProduct.weight.length !== 0 &&
                                 <div className='productSize d-flex align-items-center'>
                                     <span>Size / Weight:</span>
-                                    <ul className='list list-inline mb-0 ps-4'>
+                                    <ul className='list list-inline mb-0 ps-0'>
                                         {
                                             currentProduct.weight.map((item, index) => {
                                                 return (
-                                                    <li className='list-inline-item'>
-                                                        <Link href='#' className={`tag ${activeSize === index ? 'active' : ''}`} onClick={() => isActive(index)}>
+                                                    <li className='list-inline-item' key={index}>
+                                                        <Link to="#" className={`tag ${activeSize === index ? 'active' : ''}`} onClick={() => isActive(index)}>
                                                             {item}g
                                                         </Link>
                                                     </li>
@@ -353,17 +368,18 @@ const Details = (props) => {
                                     </ul>
                                 </div>
                             }
+
                             {/* Ram(Mobile) */}
                             {
                                 currentProduct.RAM !== undefined && currentProduct.RAM.length !== 0 &&
                                 <div className='productSize d-flex align-items-center'>
                                     <span>RAM:</span>
-                                    <ul className='list list-inline mb-0 ps-4'>
+                                    <ul className='list list-inline mb-0 ps-0'>
                                         {
                                             currentProduct.RAM.map((RAM, index) => {
                                                 return (
-                                                    <li className='list-inline-item'>
-                                                        <Link className={`tag ${activeSize === index ? 'active' : ''}`} onClick={() => isActive(index)}>
+                                                    <li className='list-inline-item' key={index}>
+                                                        <Link to="#" className={`tag ${activeSize === index ? 'active' : ''}`} onClick={() => isActive(index)}>
                                                             {RAM} GB
                                                         </Link>
                                                     </li>
@@ -378,12 +394,12 @@ const Details = (props) => {
                                 currentProduct.SIZE !== undefined && currentProduct.SIZE.length !== 0 &&
                                 <div className='productSize d-flex align-items-center'>
                                     <span>SIZE:</span>
-                                    <ul className='list list-inline mb-0 ps-4'>
+                                    <ul className='list list-inline mb-0 ps-0'>
                                         {
                                             currentProduct.SIZE.map((SIZE, index) => {
                                                 return (
-                                                    <li className='list-inline-item'>
-                                                        <Link href='#' className={`tag ${activeSize === index ? 'active' : ''}`} onClick={() => isActive(index)}>
+                                                    <li className='list-inline-item' key={index}>
+                                                        <Link to="#" className={`tag ${activeSize === index ? 'active' : ''}`} onClick={() => isActive(index)}>
                                                             {SIZE}
                                                         </Link>
                                                     </li>
@@ -394,15 +410,19 @@ const Details = (props) => {
                                 </div>
                             }
 
-                            <div className="d-flex align-items-center">
-                                <div>
+                            <div className="addCart">
+                                <div className='addCartQuan'>
                                     <Quantity />
+                                    <Button className=" btn-lg  counterSec ms-3 btn-border"><FaRegHeart /></Button>
+                                    <Button className=" btn-lg  counterSec ms-3 btn-border"><RiShuffleLine /></Button>
                                 </div>
 
                                 <div className="d-flex align-items-center">
-                                    <Button className="btn-g btn-lg addtocartbtn ms-3"><HiMiniShoppingCart /> Add to Cart</Button>
-                                    <Button className=" btn-lg addtocartbtn ms-3 btn-border"><FaRegHeart /></Button>
-                                    <Button className=" btn-lg addtocartbtn ms-3 btn-border"><RiShuffleLine /></Button>
+                                    <Button className={`btn-g btn-lg addtocartbtn addtocartbtn1 ${isAlreadyAddedInCart === true && 'no-click'}`} onClick={() => addToCart(currentProduct)} ><HiMiniShoppingCart />
+                                        {
+                                            isAdded === true || isAlreadyAddedInCart === true ? 'Added' : 'Add to Card'
+                                        }
+                                    </Button>
                                 </div>
                             </div>
 
@@ -413,7 +433,7 @@ const Details = (props) => {
 
                     <div className="card mt-5 p-5 detailsPageTabs">
                         <div className="customTabs">
-                            <ul className="list list-inline">
+                            <ul className="list list-inline customTabsMob">
                                 <li className="list-inline-item">
                                     <Button className={`${activeTabs === 0 && 'active'}`} onClick={() => setActiveTabs(0)}>Description</Button>
                                 </li>
@@ -434,7 +454,6 @@ const Details = (props) => {
                                 <div className="tabContent">
                                     <p>{currentProduct.description}</p>
                                     <br />
-
                                 </div>
                             }
 
@@ -682,36 +701,36 @@ const Details = (props) => {
 
                                             <div className="progressBarBox d-flex align-items-center">
                                                 <span className=''>5 star</span>
-                                                <div class="progress" style={{ width: '85%', height: '25px', marginLeft: '10px', fontSize: '15px' }}>
-                                                    <div class="progress-bar bg-success" style={{ width: '75%', height: '25px' }} >75%</div>
+                                                <div className="progress" style={{ width: '85%', height: '25px', marginLeft: '10px', fontSize: '15px' }}>
+                                                    <div className="progress-bar bg-success" style={{ width: '75%', height: '25px' }} >75%</div>
                                                 </div>
                                             </div>
 
                                             <div className="progressBarBox d-flex align-items-center">
                                                 <span className=''>4 star</span>
-                                                <div class="progress" style={{ width: '85%', height: '25px', marginLeft: '10px', fontSize: '15px' }}>
-                                                    <div class="progress-bar bg-success" style={{ width: '25%', height: '25px' }} >25%</div>
+                                                <div className="progress" style={{ width: '85%', height: '25px', marginLeft: '10px', fontSize: '15px' }}>
+                                                    <div className="progress-bar bg-success" style={{ width: '25%', height: '25px' }} >25%</div>
                                                 </div>
                                             </div>
 
                                             <div className="progressBarBox d-flex align-items-center">
                                                 <span className=''>3 star</span>
-                                                <div class="progress" style={{ width: '85%', height: '25px', marginLeft: '10px', fontSize: '15px' }}>
-                                                    <div class="progress-bar bg-success" style={{ width: '55%', height: '25px' }} >55%</div>
+                                                <div className="progress" style={{ width: '85%', height: '25px', marginLeft: '10px', fontSize: '15px' }}>
+                                                    <div className="progress-bar bg-success" style={{ width: '55%', height: '25px' }} >55%</div>
                                                 </div>
                                             </div>
 
                                             <div className="progressBarBox d-flex align-items-center">
                                                 <span className=''>2 star</span>
-                                                <div class="progress" style={{ width: '85%', height: '25px', marginLeft: '10px', fontSize: '15px' }}>
-                                                    <div class="progress-bar bg-success" style={{ width: '35%', height: '25px' }} >35%</div>
+                                                <div className="progress" style={{ width: '85%', height: '25px', marginLeft: '10px', fontSize: '15px' }}>
+                                                    <div className="progress-bar bg-success" style={{ width: '35%', height: '25px' }} >35%</div>
                                                 </div>
                                             </div>
 
                                             <div className="progressBarBox d-flex align-items-center">
                                                 <span className=''>1 star</span>
-                                                <div class="progress" style={{ width: '85%', height: '25px', marginLeft: '10px' }}>
-                                                    <div class="progress-bar bg-success" style={{ width: '15%', height: '25px' }} >15%</div>
+                                                <div className="progress" style={{ width: '85%', height: '25px', marginLeft: '10px' }}>
+                                                    <div className="progress-bar bg-success" style={{ width: '15%', height: '25px' }} >15%</div>
                                                 </div>
                                             </div>
 

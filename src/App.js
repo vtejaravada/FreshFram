@@ -1,6 +1,7 @@
 import React, { useEffect, useState, createContext } from 'react';
-import './App.css';
 import './responsive.css';
+import './App.css';
+
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import '../node_modules/react-bootstrap-v5/lib/dist/react-bootstrap';
 
@@ -25,8 +26,12 @@ function App() {
   const [productData, setProductData] = useState([]);
   const [cartItems, setCartItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  const [isOpenNavigation, setIsOpenNavigation] = useState(false);
 
   const [isLogin, setIsLogin] = useState();
+  const [isOpenFilters, setIsOpenFilters] = useState(false);
 
   //---------------------------------------ProductData---------------------------------------
 
@@ -65,7 +70,7 @@ function App() {
     }
   }
 
-  //---------------------------------------addToCart---------------------------------------
+  //---------------------------------------addToCart---------------------------------------//
 
   const addToCart = async (item) => {
     item.quantity = 1;
@@ -104,14 +109,23 @@ function App() {
     
   }
 
+  const openFilters=()=>{
+    setIsOpenFilters(!isOpenFilters)
+  }
+
   const value = {
     cartItems,
     isLogin,
+    windowWidth,
+    isOpenFilters,
     addToCart,
     removeItemsFromCart,
     emptyCart,
     signOut,
-    signIn
+    signIn,
+    openFilters,
+    isOpenNavigation,
+    setIsOpenNavigation
 
   }
 

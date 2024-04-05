@@ -9,19 +9,19 @@ const TopProductSet = () => {
             <div className="container-fluid">
                 <div className="row">
 
-                    <div className="topProductSec">
+                    <div className="col">
                         <TopProject title="Top Selling"/>
                     </div> 
 
-                    <div className="topProductSec">
+                    <div className="col">
                         <TopProject title="Trending Products"/>
                     </div>
 
-                    <div className="topProductSec">
+                    <div className="col">
                         <TopProject title="Recently added"/>
                     </div>
 
-                    <div className="topProductSec">
+                    <div className="col">
                         <TopProject title="Top Rated"/>
                     </div>
                 </div>

@@ -1,21 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Dailyimg1 from '../../../assets/images/Banner/DailyImg1.jpg';
 import Slider from 'react-slick';
 import Product from '../Products/Product';
 import '../HomeProductsBan/HomeProductsBan.css';
+import { MyContext } from '../../../App';
 
 const HomeProductsBan = (props) => {
     const [prodData] = useState(props.data);
     const [bestSells, setBestSells] = useState([]);
 
+    const context = useContext(MyContext);
+
     const settings = {
         dots: false,
-        infinite: true,
+        infinite: context.windowWidth>768 ? true : '',
         speed: 500,
         slidesToShow: 3,
         slidesToScroll: 1,
         fade: false,
-        arrows: true,
+        arrows: context.windowWidth>768 ? true : '',
         autoplay: 3000,
         responsive: [
             {
@@ -27,6 +30,13 @@ const HomeProductsBan = (props) => {
                     dots: false,
                 },
             },
+            {
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 1,
+                },
+            }
         ],
     };
 
@@ -51,7 +61,7 @@ const HomeProductsBan = (props) => {
                     </div>
 
                     <div className="row productRow">
-                        <div className="col-md-3 daily_Img_Sec pr-5">
+                        <div className="col-md-3 daily_Img_Sec pr-5 res-hide">
                             <img src={Dailyimg1} alt="Daily Best Sell" className="w-100" />
                         </div>
 

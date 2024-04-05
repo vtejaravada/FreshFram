@@ -273,7 +273,11 @@ footer .lastStrip .part3 ul li a:hover {
     }
 }
 
-@media (max-width: 425px) {
+@media (max-width: 575px) {
+    .footerIcon {
+        width: 80%;
+        margin: 10px auto;
+    }
 
     .partFoot {
         width: 100%;
@@ -299,5 +303,10 @@ footer .lastStrip .part3 ul li a:hover {
 
     .footerHead {
         margin: 50px 0px;
+    }
+
+    .footerIcon {
+        width: 95%;
+        margin: 10px auto;
     }
 }
