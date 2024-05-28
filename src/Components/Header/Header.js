@@ -86,18 +86,6 @@ const Header = (props) => {
         getCountry('https://countriesnow.space/api/v0.1/countries/');
     }, [countryList]);
 
-    //Scroll By top-----------------------
-
-    // useEffect(() => {
-    //     window.addEventListener("scroll", () => {
-    //         let position = window.pageYOffset;
-    //         if (position > 200) {
-    //             headerRef.current.classList.add('fixed');
-    //         } else {
-    //             headerRef.current.classList.remove('fixed');
-    //         }
-    //     })
-    // }, [])
 
     const signOut = () => {
         context.signOut();
@@ -152,12 +140,10 @@ const Header = (props) => {
                                         </ul>
 
                                         <div className="navbarToggle me-3" onClick={openNav}><MenuIcon /></div>
-
                                         {
                                             context.isLogin === 'true' &&
                                             <div className="myAccDrop me-3 " onClick={() => setIsOpenAccDropDown(!isOpenAccDropDown)}><PersonOutlineOutlinedIcon /></div>
                                         }
-
                                     </div>
                                 }
                             </div>
@@ -180,6 +166,7 @@ const Header = (props) => {
                                     {
                                         windowWidth < 768 && <div class='closeSearch' onClick={closeSearch}> <ArrowBackIosIcon /></div>
                                     }
+
                                     <Select data={Categories} placeholder={'All categories'} icon={false} />
 
                                     <div className="search">

@@ -48,11 +48,9 @@ const HomeSlider = () => {
                                             <div className="infoBan">
                                                 <h2 className='mb-4'>Don't miss amazing<br /> grocery deals</h2>
                                                 <p>Sign up for the daily newsletter</p>
-
                                                 {
                                                     context.windowWidth > 768 && <NewsLetter />
                                                 }
-
                                             </div>
                                         </>
                                     )}
@@ -61,11 +59,9 @@ const HomeSlider = () => {
                                             <div className="info">
                                                 <h2 className='mb-3'>Fresh vegetables <br />big discount</h2>
                                                 <p>save upto 50%off on your first order</p>
-
                                                 {
                                                     context.windowWidth > 768 && <NewsLetter />
                                                 }
-
                                             </div>
                                         </>
                                     )}

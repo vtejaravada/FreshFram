@@ -16,7 +16,7 @@ const Home = () => {
   const [productData, setProductData] = useState([]);
 
   useEffect(()=>{
-    getData('http://localhost:3000/productData');
+    getData('https://freshapi.onrender.com/productData');
   },[]);
 
   const getData=async(url)=>{

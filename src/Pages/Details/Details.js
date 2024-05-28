@@ -160,7 +160,7 @@ const Details = (props) => {
 
         showReviews();
 
-        getCartData("http://localhost:3000/cartItems");
+        getCartData("https://freshapi.onrender.com/cartItems");
 
     }, [id]);
 
@@ -184,7 +184,7 @@ const Details = (props) => {
 
         try {
 
-            await axios.post("http://localhost:3000/productReviews", reviewFields).then((response) => {
+            await axios.post("https://freshapi.onrender.com/productReviews", reviewFields).then((response) => {
                 reviews_Arr.push(response.data);
                 setReviewFields(() => ({
                     review: '',
@@ -206,7 +206,7 @@ const Details = (props) => {
     var reviews_Arr2 = [];
     const showReviews = async () => {
         try {
-            await axios.get("http://localhost:3000/productReviews").then((response) => {
+            await axios.get("https://freshapi.onrender.com/productReviews").then((response) => {
                 if (response.data.length !== 0) {
                     response.data.map((item) => {
                         if (parseInt(item.productId) === parseInt(id)) {
@@ -370,6 +370,7 @@ const Details = (props) => {
                             }
 
                             {/* Ram(Mobile) */}
+                            
                             {
                                 currentProduct.RAM !== undefined && currentProduct.RAM.length !== 0 &&
                                 <div className='productSize d-flex align-items-center'>
@@ -389,7 +390,9 @@ const Details = (props) => {
                                     </ul>
                                 </div>
                             }
+
                             {/* SIZE(TV) */}
+
                             {
                                 currentProduct.SIZE !== undefined && currentProduct.SIZE.length !== 0 &&
                                 <div className='productSize d-flex align-items-center'>

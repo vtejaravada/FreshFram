@@ -65,6 +65,7 @@ const HomeProductsBan = (props) => {
                             <img src={Dailyimg1} alt="Daily Best Sell" className="w-100" />
                         </div>
 
+
                         <div className="col-md-9">
                             <Slider {...settings} className="prodSlider">
                                 {bestSells.map((item, index) => (

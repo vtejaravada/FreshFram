@@ -43,13 +43,12 @@ const SignIn = () => {
     console.log(formFields)
   }
 
-
   const signIn = () => {
     setShowLoader(true);
     signInWithEmailAndPassword(auth, formFields.email, formFields.password)
       .then((userCredential) => {
         // Signed in 
-        // const user = userCredential.user;
+        const user = userCredential.user;
         setShowLoader(false);
         setFormFields({
           email: '',
@@ -67,16 +66,15 @@ const SignIn = () => {
       });
   }
 
-
   const signInWithGoogle = () => {
     setShowLoader(true);
     signInWithPopup(auth, googleProvider)
       .then((result) => {
         
-        // const credential = GoogleAuthProvider.credentialFromResult(result);
-        // const token = credential.accessToken;
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
         // The signed-in user info.
-        // const user = result.user;
+        const user = result.user;
         
         setShowLoader(false);
         setFormFields({
@@ -89,12 +87,12 @@ const SignIn = () => {
 
       }).catch((error) => {
         // Handle Errors here.
-          // const errorCode = error.code;
-          // const errorMessage = error.message;
+          const errorCode = error.code;
+          const errorMessage = error.message;
         // The email of the user's account used.
-          // const email = error.customData.email;
+          const email = error.customData.email;
         // The AuthCredential type that was used.
-          // const credential = GoogleAuthProvider.credentialFromError(error);
+          const credential = GoogleAuthProvider.credentialFromError(error);
 
         console.error("Error signing in with Google:", error);
         setShowLoader(false);

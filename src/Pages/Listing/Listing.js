@@ -254,16 +254,13 @@ const Listing = (props) => {
                                 <li className="list-inline-item text-capitalize">
                                     {id}
                                 </li>
-
                             }
-
                         </ul>
                     </div>
 
                     <div className="listingData">
                         <div className="row">
                             <div className={`col-md-3 sidebarWrapper ${context.isOpenFilters === true && 'click'} `}>
-
 
                                 {
                                     data.length !== 0 && <Sidebar data={props.data} currentCatData={data} filterByBrand={filterByBrand} filterByPrice={filterByPrice} filterByRating={filterByRating} />

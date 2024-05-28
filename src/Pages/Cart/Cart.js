@@ -22,7 +22,7 @@ const Cart = () => {
 
     useEffect(() => {
         if(context.isLogin==="true"){
-            getCartData("http://localhost:3000/cartItems");
+            getCartData("https://freshapi.onrender.com/cartItems");
         }else{
             history('/');
         }
@@ -42,17 +42,17 @@ const Cart = () => {
 
 
     const deleteItem = async (id) => {
-        const response = await axios.delete(`http://localhost:3000/cartItems/${id}`);
+        const response = await axios.delete(`https://freshapi.onrender.com/cartItems/${id}`);
         if (response !== null) {
-            getCartData("http://localhost:3000/cartItems");
+            getCartData("https://freshapi.onrender.com/cartItems");
             context.removeItemsFromCart(id);
         }
     }
 
     const emptyCart = async () => {
         try {
-            await Promise.all(cartItems.map(item => axios.delete(`http://localhost:3000/cartItems/${parseInt(item.id)}`)));
-            getCartData("http://localhost:3000/cartItems");
+            await Promise.all(cartItems.map(item => axios.delete(`https://freshapi.onrender.com/cartItems/${parseInt(item.id)}`)));
+            getCartData("https://freshapi.onrender.com/cartItems");
             context.emptyCart();
         } catch (error) {
             console.error('Error emptying cart:', error.message);

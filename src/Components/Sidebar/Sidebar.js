@@ -17,14 +17,6 @@ import 'react-range-slider-input/dist/style.css';
 import { Button } from '@mui/material';
 import { MyContext } from '../../App';
 
-
-
-// function valuetext(value) {
-//     return `${value}°C`;
-//   }
-
-//   const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
-
 const Sidebar = (props) => {
 
     const [value, setValue] = React.useState([20, 100000]);
@@ -178,7 +170,6 @@ const Sidebar = (props) => {
                         </ul>
                     </div>
 
-
                     <div className='filters pt-0'>
                         <h5>Filter By Ratings</h5>
                         <ul>
@@ -207,7 +198,7 @@ const Sidebar = (props) => {
 
                 </div>
 
-                <img src={Banner} alt="Banner" className='w-100 sideImg shadow res-hide' />
+                <img src={Banner} alt="Banner" className='w-100 sideImg shadow res-hide'/>
             </div>
         </>
     )

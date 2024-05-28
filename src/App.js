@@ -36,8 +36,8 @@ function App() {
   //---------------------------------------ProductData---------------------------------------
 
   useEffect(() => {
-    getData('http://localhost:3000/productData');
-    getCartData('http://localhost:3000/cartItems');
+    getData('https://freshapi.onrender.com/productData');
+    getCartData('https://freshapi.onrender.com/cartItems');
 
     const is_Login = localStorage.getItem('isLogin');
     setIsLogin(is_Login);
@@ -76,7 +76,7 @@ function App() {
     item.quantity = 1;
 
     try {
-      await axios.post("http://localhost:3000/cartItems", item).then((response) => {
+      await axios.post("https://freshapi.onrender.com/cartItems", item).then((response) => {
         if (response !== undefined) {
           setCartItems([...cartItems, { ...item, quantity: 1 }])
         }

@@ -15,14 +15,13 @@ import { MyContext } from '../../../App';
 const Nav = (props) => {
 
     const [navData, setNavData] = useState([]);
-    const [showDropdown, setShowDropdown] = useState(false);
     const [isOpenNav, setIsOpenNav] = useState(false);
-    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
     const [openDropdownMenu, setopenDropdownMenu] = useState(false);
-    const [openDropdownMenuIndex, setopenDropdownMenuIndex] = useState(null);
 
+    const [showDropdown, setShowDropdown] = useState(false);
+    const [openDropdownMenuIndex, setopenDropdownMenuIndex] = useState(null);
     const [openMegaMenu, setOpenMegaMenu] = useState(false);
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
     const context = useContext(MyContext);
 
@@ -73,7 +72,7 @@ const Nav = (props) => {
                                                         <span className="img">
                                                             <img src={proIcon1} alt="productImg1" width={30} />
                                                         </span>
-                                                        <Link to={`/cat/${item.cat_name.toLowerCase()}/${item_.cat_name.replace(/\s/g, '-').toLowerCase()}`}>
+                                                        <Link to={`/cat/${item.cat_name.toLowerCase()}/${item_.cat_name.replace(/\s/g, '-').toLowerCase()}`} >
                                                             {item_.cat_name}
                                                         </Link>
                                                     </li>
@@ -93,13 +92,12 @@ const Nav = (props) => {
 
                                     <li className="list-inline-item listNav">
                                         <Link to="/about" className='dealHe' onClick={props.closeNav}><LocalFireDepartmentIcon className='fire' />Deals </Link>
-                                        {/* <Link to="/about" className='dealIc'><LocalFireDepartmentIcon className='fire' /></Link> */}
+                                    
                                     </li>
 
                                     <li className="list-inline-item listNav">
                                         <Link to="/" className='homeHe' onClick={props.closeNav} >Home
                                         </Link>
-                                        {/* <Link to="/" className='homeIc'><HomeIcon/></Link> */}
                                     </li>
 
                                     {
@@ -157,7 +155,7 @@ const Nav = (props) => {
                                                             <div key={index} className="megamenu_Part">
                                                                 <div onClick={props.closeNav}>
                                                                     <Link to={`/cat/${item.cat_name.toLowerCase()}`}>
-                                                                        <h4 className='text-g text-capitalize'>
+                                                                        <h4 className='text-g text-capitalize' onClick={closeNav}>
                                                                             {item.cat_name}
                                                                         </h4>
                                                                     </Link>
@@ -199,7 +197,7 @@ const Nav = (props) => {
                                     </li>
 
                                     <li className="list-inline-item listNav">
-                                        <Link to="/about">Blog <IoIosArrowDown className='arrow' /></Link>
+                                        <Link to="/about">Blog <IoIosArrowDown className='arrow' onClick={closeNav}/></Link>
 
                                         <div className="dropdown_menu">
                                             <ul>
@@ -265,3 +263,4 @@ const Nav = (props) => {
 }
 
 export default Nav
+
